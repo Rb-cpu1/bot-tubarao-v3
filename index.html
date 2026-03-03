@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bot Tubarão V3 Ultimate</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#070b14">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- SPLASH SCREEN -->
+    <div id="splash-screen" class="splash active">
+        <div class="splash-content">
+            <div class="shark-logo-animated">🦈</div>
+            <h1 class="splash-title">BOT TUBARÃO</h1>
+            <div class="splash-version">V3 ULTIMATE</div>
+            <div class="splash-loader">
+                <div class="loader-bar"></div>
+            </div>
+            <p class="splash-text">Carregando sistema...</p>
+        </div>
+    </div>
+
+    <!-- TELA DE LOGIN -->
+    <div id="login-screen" class="screen">
+        <div class="login-bg-effects">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="login-container">
+            <div class="logo-section">
+                <div class="shark-icon">🦈</div>
+                <h1 class="logo-text">BOT TUBARÃO</h1>
+                <div class="version-badge">V3 ULTIMATE</div>
+                <p class="tagline">Sistema Estratégico de Sinais Inteligentes</p>
+                <p class="sub-tagline">Menos sinais. Mais precisão. Mais lucro.</p>
+            </div>
+
+            <div class="login-form">
+                <div class="form-tabs">
+                    <button class="tab-btn active" onclick="showLogin()">ENTRAR</button>
+                    <button class="tab-btn" onclick="showRegister()">CADASTRAR</button>
+                </div>
+
+                <div id="login-tab" class="form-section active">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="login-email" placeholder="Email" autocomplete="email">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="Senha" autocomplete="current-password">
+                    </div>
+                    <button id="btn-login" class="btn-primary" onclick="loginUser()">
+                        <i class="fas fa-sign-in-alt"></i> ENTRAR NO SISTEMA
+                    </button>
+                </div>
+
+                <div id="register-tab" class="form-section">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="reg-name" placeholder="Nome completo">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="reg-email" placeholder="Email">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="reg-password" placeholder="Senha (mín. 6 caracteres)">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-key"></i>
+                        <input type="text" id="reg-license" placeholder="Chave de licença">
+                    </div>
+                    <button id="btn-register" class="btn-primary" onclick="registerUser()">
+                        <i class="fas fa-rocket"></i> ATIVAR LICENÇA
+                    </button>
+                </div>
+
+                <div id="login-error" class="error-msg"></div>
+                <div id="login-success" class="success-msg"></div>
+            </div>
+
+            <div class="login-footer">
+                <p>🔒 Conexão segura e criptografada</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TELA PRINCIPAL -->
+    <div id="app-screen" class="screen">
+
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <span class="header-shark">🦈</span>
+                <div class="header-info">
+                    <span class="header-title">TUBARÃO V3</span>
+                    <span class="header-subtitle">ULTIMATE</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <span id="connection-status" class="conn-status online">
+                    <span class="conn-dot"></span> ONLINE
+                </span>
+            </div>
+            <div class="header-right">
+                <button class="btn-icon" onclick="toggleSound()" id="btn-sound">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button class="btn-icon" onclick="showPage('settings')">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="btn-icon logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Pages Container -->
+        <div class="pages-container">
+
+            <!-- PAGE: DASHBOARD -->
+            <div id="page-dashboard" class="page active">
+
+                <!-- Welcome & Status Bar -->
+                <div class="welcome-bar">
+                    <div class="welcome-left">
+                        <span class="welcome-text">Olá, <span id="display-name">Trader</span></span>
+                        <span class="welcome-date" id="current-date">--</span>
+                    </div>
+                    <div class="welcome-right">
+                        <span class="plan-badge" id="user-plan">PRO</span>
+                    </div>
+                </div>
+
+                <!-- Market Status -->
+                <div class="market-bar">
+                    <div class="market-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="market-time">--:--:--</span>
+                    </div>
+                    <div class="market-item">
+                        <span class="market-dot" id="market-dot"></span>
+                        <span id="market-status">--</span>
+                    </div>
+                    <div class="market-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span id="session-name">--</span>
+                    </div>
+                </div>
+
+                <!-- Alerta de Notícias -->
+                <div id="news-alert" class="news-alert hidden">
+                    <div class="news-alert-content">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="news-alert-text">
+                            <strong>⚠️ NOTÍCIA DE ALTO IMPACTO</strong>
+                            <span id="news-alert-detail">--</span>
+                        </div>
+                        <span class="news-alert-time" id="news-alert-time">--</span>
+                    </div>
+                </div>
+
+                <!-- Active Signal Card -->
+                <div id="signal-card" class="signal-card waiting">
+                    <div class="signal-card-header">
+                        <div class="signal-card-title">
+                            <i class="fas fa-satellite-dish"></i>
+                            <span>SINAL ATIVO</span>
+                        </div>
+                        <div class="signal-card-badge" id="signal-badge">AGUARDANDO</div>
+                    </div>
+
+                    <div class="signal-card-body">
+                        <div id="signal-waiting" class="signal-waiting">
+                            <div class="radar-container">
+                                <div class="radar-circle"></div>
+                                <div class="radar-circle"></div>
+                                <div class="radar-circle"></div>
+                                <div class="radar-sweep"></div>
+                                <div class="radar-center">🦈</div>
+                            </div>
+                            <p class="waiting-text">Analisando mercado...</p>
+                            <p class="waiting-subtext">O tubarão está caçando a melhor entrada</p>
+                        </div>
+
+                        <div id="signal-active" class="signal-active hidden">
+                            <div class="signal-direction-container" id="signal-direction-box">
+                                <span class="signal-icon" id="signal-icon">📈</span>
+                                <span class="signal-direction-text" id="signal-direction">CALL</span>
+                            </div>
+
+                            <div class="signal-info-grid">
+                                <div class="signal-info-item">
+                                    <span class="info-label">ATIVO</span>
+                                    <span class="info-value" id="sig-asset">EUR/USD</span>
+                                </div>
+                                <div class="signal-info-item">
+                                    <span class="info-label">TIMEFRAME</span>
+                                    <span class="info-value" id="sig-timeframe">M5</span>
+                                </div>
+                                <div class="signal-info-item">
+                                    <span class="info-label">EXPIRAÇÃO</span>
+                                    <span class="info-value" id="sig-expiry">5 min</span>
+                                </div>
+                                <div class="signal-info-item">
+                                    <span class="info-label">HORA</span>
+                                    <span class="info-value" id="sig-time">--:--</span>
+                                </div>
+                            </div>
+
+                            <!-- Score do Sinal -->
+                            <div class="signal-score-container">
+                                <div class="score-header">
+                                    <span>SCORE DO SINAL</span>
+                                    <span class="score-value" id="sig-score">0</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" id="score-fill"></div>
+                                </div>
+                                <div class="score-labels">
+                                    <span>Fraco</span>
+                                    <span>Médio</span>
+                                    <span>Forte</span>
+                                    <span>Ultra</span>
+                                </div>
+                            </div>
+
+                            <!-- Confluências -->
+                            <div class="confluences-container">
+                                <div class="conf-title">CONFLUÊNCIAS DETECTADAS</div>
+                                <div class="conf-list" id="conf-list"></div>
+                            </div>
+
+                            <!-- Countdown -->
+                            <div class="signal-countdown">
+                                <span class="countdown-label">Expira em</span>
+                                <span class="countdown-value" id="sig-countdown">5:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="stats-row">
+                    <div class="stat-mini win">
+                        <div class="stat-mini-icon"><i class="fas fa-check"></i></div>
+                        <div class="stat-mini-info">
+                            <span class="stat-mini-value" id="stat-wins">0</span>
+                            <span class="stat-mini-label">Wins</span>
+                        </div>
+                    </div>
+                    <div class="stat-mini loss">
+                        <div class="stat-mini-icon"><i class="fas fa-times"></i></div>
+                        <div class="stat-mini-info">
+                            <span class="stat-mini-value" id="stat-losses">0</span>
+                            <span class="stat-mini-label">Loss</span>
+                        </div>
+                    </div>
+                    <div class="stat-mini rate">
+                        <div class="stat-mini-icon"><i class="fas fa-bullseye"></i></div>
+                        <div class="stat-mini-info">
+                            <span class="stat-mini-value" id="stat-rate">0%</span>
+                            <span class="stat-mini-label">Taxa</span>
+                        </div>
+                    </div>
+                    <div class="stat-mini profit">
+                        <div class="stat-mini-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="stat-mini-info">
+                            <span class="stat-mini-value" id="stat-profit">$0</span>
+                            <span class="stat-mini-label">Lucro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indicadores Técnicos em tempo real -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line"></i>
+                        <span>INDICADORES TÉCNICOS</span>
+                    </div>
+                    <div class="indicators-grid">
+                        <div class="indicator-item">
+                            <div class="ind-name">RSI (14)</div>
+                            <div class="ind-bar"><div class="ind-fill" id="ind-rsi-fill"></div></div>
+                            <div class="ind-value" id="ind-rsi">--</div>
+                        </div>
+                        <div class="indicator-item">
+                            <div class="ind-name">Stoch RSI</div>
+                            <div class="ind-bar"><div class="ind-fill" id="ind-stoch-fill"></div></div>
+                            <div class="ind-value" id="ind-stoch">--</div>
+                        </div>
+                        <div class="indicator-item">
+                            <div class="ind-name">MACD</div>
+                            <div class="ind-value macd" id="ind-macd">--</div>
+                        </div>
+                        <div class="indicator-item">
+                            <div class="ind-name">Tendência</div>
+                            <div class="ind-value trend" id="ind-trend">--</div>
+                        </div>
+                        <div class="indicator-item">
+                            <div class="ind-name">Bollinger</div>
+                            <div class="ind-value" id="ind-bb">--</div>
+                        </div>
+                        <div class="indicator-item">
+                            <div class="ind-name">Volatilidade</div>
+                            <div class="ind-value" id="ind-vol">--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sentimento do Mercado -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-brain"></i>
+                        <span>SENTIMENTO DO MERCADO</span>
+                    </div>
+                    <div class="sentiment-container">
+                        <div class="sentiment-bar-container">
+                            <span class="sentiment-label bears">🐻 Bears</span>
+                            <div class="sentiment-bar">
+                                <div class="sentiment-fill bulls" id="sentiment-bulls"></div>
+                            </div>
+                            <span class="sentiment-label bulls">Bulls 🐂</span>
+                        </div>
+                        <div class="sentiment-values">
+                            <span id="bears-pct">50%</span>
+                            <span class="sentiment-verdict" id="sentiment-verdict">NEUTRO</span>
+                            <span id="bulls-pct">50%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suporte e Resistência -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-layer-group"></i>
+                        <span>SUPORTE & RESISTÊNCIA</span>
+                    </div>
+                    <div class="sr-container">
+                        <div class="sr-level resistance">
+                            <span class="sr-label">R3</span>
+                            <span class="sr-value" id="sr-r3">--</span>
+                        </div>
+                        <div class="sr-level resistance">
+                            <span class="sr-label">R2</span>
+                            <span class="sr-value" id="sr-r2">--</span>
+                        </div>
+                        <div class="sr-level resistance">
+                            <span class="sr-label">R1</span>
+                            <span class="sr-value" id="sr-r1">--</span>
+                        </div>
+                        <div class="sr-level pivot">
+                            <span class="sr-label">PIVOT</span>
+                            <span class="sr-value" id="sr-pivot">--</span>
+                        </div>
+                        <div class="sr-level support">
+                            <span class="sr-label">S1</span>
+                            <span class="sr-value" id="sr-s1">--</span>
+                        </div>
+                        <div class="sr-level support">
+                            <span class="sr-label">S2</span>
+                            <span class="sr-value" id="sr-s2">--</span>
+                        </div>
+                        <div class="sr-level support">
+                            <span class="sr-label">S3</span>
+                            <span class="sr-value" id="sr-s3">--</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PAGE: HISTÓRICO -->
+            <div id="page-history" class="page">
+                <div class="page-title">
+                    <i class="fas fa-history"></i> HISTÓRICO DE SINAIS
+                </div>
+
+                <!-- Filtros -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterHistory('all', this)">Todos</button>
+                    <button class="filter-btn" onclick="filterHistory('win', this)">✅ Wins</button>
+                    <button class="filter-btn" onclick="filterHistory('loss', this)">❌ Loss</button>
+                    <button class="filter-btn" onclick="filterHistory('call', this)">📈 Call</button>
+                    <button class="filter-btn" onclick="filterHistory('put', this)">📉 Put</button>
+                </div>
+
+                <!-- Performance Chart -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area"></i>
+                        <span>PERFORMANCE</span>
+                    </div>
+                    <div class="perf-chart" id="perf-chart">
+                        <canvas id="perfCanvas"></canvas>
+                    </div>
+                    <div class="perf-stats">
+                        <div class="perf-stat">
+                            <span class="perf-label">Total de Sinais</span>
+                            <span class="perf-value" id="perf-total">0</span>
+                        </div>
+                        <div class="perf-stat">
+                            <span class="perf-label">Melhor Sequência</span>
+                            <span class="perf-value green" id="perf-streak">0</span>
+                        </div>
+                        <div class="perf-stat">
+                            <span class="perf-label">Lucro Total</span>
+                            <span class="perf-value" id="perf-profit">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Sinais -->
+                <div class="card">
+                    <div id="history-list" class="history-list">
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>Nenhum sinal registrado</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE: CALENDÁRIO ECONÔMICO -->
+            <div id="page-calendar" class="page">
+                <div class="page-title">
+                    <i class="fas fa-calendar-alt"></i> CALENDÁRIO ECONÔMICO
+                </div>
+
+                <div class="calendar-legend">
+                    <span class="legend-item"><span class="impact-dot high"></span> Alto Impacto</span>
+                    <span class="legend-item"><span class="impact-dot medium"></span> Médio Impacto</span>
+                    <span class="legend-item"><span class="impact-dot low"></span> Baixo Impacto</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-newspaper"></i>
+                        <span>NOTÍCIAS DE HOJE</span>
+                    </div>
+                    <div id="news-list" class="news-list">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Carregando notícias...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Horários Ideais -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-clock"></i>
+                        <span>MELHORES HORÁRIOS PARA OPERAR</span>
+                    </div>
+                    <div class="schedule-list">
+                        <div class="schedule-item active-session" id="session-london">
+                            <div class="schedule-icon">🇬🇧</div>
+                            <div class="schedule-info">
+                                <span class="schedule-name">Londres</span>
+                                <span class="schedule-time">04:00 - 12:00 (UTC-3)</span>
+                            </div>
+                            <span class="schedule-status" id="london-status">--</span>
+                        </div>
+                        <div class="schedule-item" id="session-ny">
+                            <div class="schedule-icon">🇺🇸</div>
+                            <div class="schedule-info">
+                                <span class="schedule-name">Nova York</span>
+                                <span class="schedule-time">09:30 - 16:00 (UTC-3)</span>
+                            </div>
+                            <span class="schedule-status" id="ny-status">--</span>
+                        </div>
+                        <div class="schedule-item" id="session-tokyo">
+                            <div class="schedule-icon">🇯🇵</div>
+                            <div class="schedule-info">
+                                <span class="schedule-name">Tóquio</span>
+                                <span class="schedule-time">20:00 - 04:00 (UTC-3)</span>
+                            </div>
+                            <span class="schedule-status" id="tokyo-status">--</span>
+                        </div>
+                        <div class="schedule-item overlap" id="session-overlap">
+                            <div class="schedule-icon">⚡</div>
+                            <div class="schedule-info">
+                                <span class="schedule-name">Overlap (Londres + NY)</span>
+                                <span class="schedule-time">09:30 - 12:00 (UTC-3)</span>
+                            </div>
+                            <span class="schedule-status" id="overlap-status">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE: BANCA -->
+            <div id="page-banca" class="page">
+                <div class="page-title">
+                    <i class="fas fa-wallet"></i> GERENCIAMENTO DE BANCA
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-cog"></i>
+                        <span>CONFIGURAR BANCA</span>
+                    </div>
+                    <div class="banca-setup">
+                        <div class="banca-input-row">
+                            <label>Valor da Banca ($)</label>
+                            <input type="number" id="input-banca" placeholder="100.00" value="100" onchange="calcBanca()">
+                        </div>
+                        <div class="banca-input-row">
+                            <label>Risco por operação (%)</label>
+                            <input type="number" id="input-risk" placeholder="2" value="2" min="1" max="10" onchange="calcBanca()">
+                        </div>
+                        <div class="banca-input-row">
+                            <label>Payout médio (%)</label>
+                            <input type="number" id="input-payout" placeholder="87" value="87" onchange="calcBanca()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="banca-results">
+                    <div class="banca-result-card">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span class="banca-result-label">Entrada por operação</span>
+                        <span class="banca-result-value blue" id="banca-entry">$2.00</span>
+                    </div>
+                    <div class="banca-result-card">
+                        <i class="fas fa-arrow-down"></i>
+                        <span class="banca-result-label">Stop Loss diário (10%)</span>
+                        <span class="banca-result-value red" id="banca-sl">-$10.00</span>
+                    </div>
+                    <div class="banca-result-card">
+                        <i class="fas fa-arrow-up"></i>
+                        <span class="banca-result-label">Stop Gain diário (20%)</span>
+                        <span class="banca-result-value green" id="banca-sg">+$20.00</span>
+                    </div>
+                    <div class="banca-result-card">
+                        <i class="fas fa-hashtag"></i>
+                        <span class="banca-result-label">Máx. operações/dia</span>
+                        <span class="banca-result-value blue" id="banca-maxops">5</span>
+                    </div>
+                    <div class="banca-result-card">
+                        <i class="fas fa-trophy"></i>
+                        <span class="banca-result-label">Lucro por WIN</span>
+                        <span class="banca-result-value green" id="banca-win-profit">+$1.74</span>
+                    </div>
+                </div>
+
+                <!-- Martingale Calculator -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-calculator"></i>
+                        <span>CALCULADORA MARTINGALE</span>
+                    </div>
+                    <div class="martingale-info">
+                        <p class="mg-warning">⚠️ Use Martingale com cautela. Máximo 2 níveis recomendado.</p>
+                    </div>
+                    <div class="martingale-table">
+                        <div class="mg-row header">
+                            <span>Nível</span>
+                            <span>Entrada</span>
+                            <span>Total Investido</span>
+                            <span>Lucro se WIN</span>
+                        </div>
+                        <div class="mg-row" id="mg-row-0">
+                            <span>1ª</span>
+                            <span id="mg-entry-0">--</span>
+                            <span id="mg-total-0">--</span>
+                            <span id="mg-profit-0">--</span>
+                        </div>
+                        <div class="mg-row" id="mg-row-1">
+                            <span>2ª (MG1)</span>
+                            <span id="mg-entry-1">--</span>
+                            <span id="mg-total-1">--</span>
+                            <span id="mg-profit-1">--</span>
+                        </div>
+                        <div class="mg-row" id="mg-row-2">
+                            <span>3ª (MG2)</span>
+                            <span id="mg-entry-2">--</span>
+                            <span id="mg-total-2">--</span>
+                            <span id="mg-profit-2">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progresso Diário -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>PROGRESSO DIÁRIO</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-ring-container">
+                            <svg class="progress-ring" viewBox="0 0 120 120">
+                                <circle class="progress-ring-bg" cx="60" cy="60" r="54"/>
+                                <circle class="progress-ring-fill" cx="60" cy="60" r="54" id="progress-ring"/>
+                            </svg>
+                            <div class="progress-ring-text">
+                                <span class="progress-pct" id="progress-pct">0%</span>
+                                <span class="progress-label">da meta</span>
+                            </div>
+                        </div>
+                        <div class="progress-details">
+                            <div class="progress-item">
+                                <span>Meta diária</span>
+                                <span class="green" id="prog-meta">+$20.00</span>
+                            </div>
+                            <div class="progress-item">
+                                <span>Lucro atual</span>
+                                <span id="prog-current">$0.00</span>
+                            </div>
+                            <div class="progress-item">
+                                <span>Operações realizadas</span>
+                                <span id="prog-ops">0/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE: SETTINGS -->
+            <div id="page-settings" class="page">
+                <div class="page-title">
+                    <i class="fas fa-cog"></i> CONFIGURAÇÕES
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-user"></i>
+                        <span>PERFIL</span>
+                    </div>
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <span class="setting-label">Nome</span>
+                            <span class="setting-value" id="set-name">--</span>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Email</span>
+                            <span class="setting-value" id="set-email">--</span>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Plano</span>
+                            <span class="setting-value gold" id="set-plan">PRO</span>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Membro desde</span>
+                            <span class="setting-value" id="set-since">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-sliders-h"></i>
+                        <span>PREFERÊNCIAS DO BOT</span>
+                    </div>
+                    <div class="settings-group">
+                        <div class="setting-item toggle">
+                            <span class="setting-label">Alertas sonoros</span>
+                            <label class="switch">
+                                <input type="checkbox" id="set-sound" checked onchange="saveSetting('sound', this.checked)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item toggle">
+                            <span class="setting-label">Filtro de notícias</span>
+                            <label class="switch">
+                                <input type="checkbox" id="set-newsfilter" checked onchange="saveSetting('newsFilter', this.checked)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item toggle">
+                            <span class="setting-label">Apenas sinais ULTRA</span>
+                            <label class="switch">
+                                <input type="checkbox" id="set-ultraonly" onchange="saveSetting('ultraOnly', this.checked)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Confluência mínima</span>
+                            <select id="set-minconf" onchange="saveSetting('minConf', this.value)">
+                                <option value="4">4 (Mais sinais)</option>
+                                <option value="5" selected>5 (Recomendado)</option>
+                                <option value="6">6 (Conservador)</option>
+                                <option value="7">7 (Ultra conservador)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-coins"></i>
+                        <span>ATIVOS PREFERIDOS</span>
+                    </div>
+                    <div class="assets-grid">
+                        <label class="asset-check">
+                            <input type="checkbox" checked value="EUR/USD"> EUR/USD
+                        </label>
+                        <label class="asset-check">
+                            <input type="checkbox" checked value="USD/JPY"> USD/JPY
+                        </label>
+                        <label class="asset-check">
+                            <input type="checkbox" checked value="EUR/GBP"> EUR/GBP
+                        </label>
+                        <label class="asset-check">
+                            <input type="checkbox" checked value="GBP/USD"> GBP/USD
+                        </label>
+                        <label class="asset-check">
+                            <input type="checkbox" value="AUD/USD"> AUD/USD
+                        </label>
+                        <label class="asset-check">
+                            <input type="checkbox" value="USD/CHF"> USD/CHF
+                        </label>
+                        <label class="asset-check">
+                            <input type="checkbox" checked value="BTC/USD"> BTC/USD
+                        </label>
+                        <label class="asset-check">
+                            <input type="checkbox" value="USD/CAD"> USD/CAD
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle"></i>
+                        <span>SOBRE</span>
+                    </div>
+                    <div class="about-section">
+                        <div class="about-logo">🦈</div>
+                        <h3>Bot Tubarão V3 Ultimate</h3>
+                        <p>Sistema Estratégico de Sinais Inteligentes</p>
+                        <p class="version-text">Versão 3.0.0 Ultimate</p>
+                        <div class="about-links">
+                            <a href="https://wa.me/258849641731" target="_blank" class="about-link">
+                                <i class="fab fa-whatsapp"></i> Suporte WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" onclick="showPage('dashboard', this)">
+                <i class="fas fa-chart-line"></i>
+                <span>Sinais</span>
+            </button>
+            <button class="nav-btn" onclick="showPage('history', this)">
+                <i class="fas fa-history"></i>
+                <span>Histórico</span>
+            </button>
+            <button class="nav-btn" onclick="showPage('calendar', this)">
+                <i class="fas fa-calendar"></i>
+                <span>Notícias</span>
+            </button>
+            <button class="nav-btn" onclick="showPage('banca', this)">
+                <i class="fas fa-wallet"></i>
+                <span>Banca</span>
+            </button>
+            <button class="nav-btn" onclick="showPage('settings', this)">
+                <i class="fas fa-cog"></i>
+                <span>Config</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Alert Sound -->
+    <audio id="alert-sound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Firebase + App Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, query, orderBy, limit, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDu_jqU7wO09scNVf6NrWBEnC_eli-ZKgI",
+            authDomain: "bot-tubarao-v3.firebaseapp.com",
+            projectId: "bot-tubarao-v3",
+            storageBucket: "bot-tubarao-v3.firebasestorage.app",
+            messagingSenderId: "977016143412",
+            appId: "1:977016143412:web:50d97387b51899cc4ed461",
+            measurementId: "G-N4X3VCTXLF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+        let userData = null;
+
+        const VALID_LICENSES = {
+            "TUBARAO2025": "Pro",
+            "SHARKV3PRO": "Pro",
+            "TUBARAOELITE": "Elite",
+            "SHARKULTRA": "Elite",
+            "TRADER2025": "Básico",
+            "DEMO123": "Demo"
+        };
+
+        // ==================== AUTH ====================
+
+        window.registerUser = async function() {
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const license = document.getElementById('reg-license').value.trim().toUpperCase();
+
+            if (!name || !email || !password || !license) {
+                showError("Preencha todos os campos!"); return;
+            }
+            if (password.length < 6) {
+                showError("Senha deve ter no mínimo 6 caracteres!"); return;
+            }
+            if (!VALID_LICENSES[license]) {
+                showError("❌ Chave de licença inválida!"); return;
+            }
+
+            try {
+                showError(""); showSuccess("Criando conta...");
+                const cred = await createUserWithEmailAndPassword(auth, email, password);
+                await setDoc(doc(db, "users", cred.user.uid), {
+                    name, email, license,
+                    plan: VALID_LICENSES[license],
+                    createdAt: new Date().toISOString(),
+                    settings: {
+                        sound: true, newsFilter: true,
+                        ultraOnly: false, minConf: 5
+                    },
+                    stats: { wins: 0, losses: 0, totalProfit: 0, streak: 0, bestStreak: 0 },
+                    banca: { value: 100, risk: 2, payout: 87 }
+                });
+                showSuccess("✅ Conta criada com sucesso!");
+            } catch (e) {
+                showError(getErrorMsg(e.code));
+            }
+        }
+
+        window.loginUser = async function() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            if (!email || !password) { showError("Preencha email e senha!"); return; }
+            try {
+                showError(""); showSuccess("Entrando...");
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (e) { showError(getErrorMsg(e.code)); }
+        }
+
+        window.logout = async function() {
+            if (confirm("Deseja sair do sistema?")) {
+                await signOut(auth);
+                document.getElementById('app-screen').classList.remove('active');
+                document.getElementById('login-screen').classList.add('active');
+            }
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            document.getElementById('splash-screen').classList.remove('active');
+            if (user) {
+                currentUser = user;
+                const snap = await getDoc(doc(db, "users", user.uid));
+                if (snap.exists()) {
+                    userData = snap.data();
+                    initApp();
+                }
+            } else {
+                document.getElementById('login-screen').classList.add('active');
+            }
+        });
+
+        function initApp() {
+            document.getElementById('login-screen').classList.remove('active');
+            document.getElementById('app-screen').classList.add('active');
+            document.getElementById('display-name').textContent = userData.name.split(' ')[0];
+            document.getElementById('user-plan').textContent = userData.plan.toUpperCase();
+            document.getElementById('set-name').textContent = userData.name;
+            document.getElementById('set-email').textContent = userData.email;
+            document.getElementById('set-plan').textContent = userData.plan;
+            document.getElementById('set-since').textContent = new Date(userData.createdAt).toLocaleDateString('pt-BR');
+
+            if (userData.banca) {
+                document.getElementById('input-banca').value = userData.banca.value || 100;
+                document.getElementById('input-risk').value = userData.banca.risk || 2;
+                document.getElementById('input-payout').value = userData.banca.payout || 87;
+            }
+            if (userData.stats) {
+                updateStatsDisplay(userData.stats);
+            }
+            if (userData.settings) {
+                document.getElementById('set-sound').checked = userData.settings.sound !== false;
+                document.getElementById('set-newsfilter').checked = userData.settings.newsFilter !== false;
+                document.getElementById('set-ultraonly').checked = userData.settings.ultraOnly === true;
+                document.getElementById('set-minconf').value = userData.settings.minConf || 5;
+            }
+
+            calcBanca();
+            startClock();
+            startBot();
+            loadEconomicCalendar();
+            loadHistory();
+        }
+
+        // ==================== CLOCK & MARKET ====================
+
+        function startClock() {
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('market-time').textContent = now.toLocaleTimeString('pt-BR');
+            document.getElementById('current-date').textContent = now.toLocaleDateString('pt-BR', {
+                weekday: 'long', day: 'numeric', month: 'long'
+            });
+
+            const utcH = now.getUTCHours();
+            const day = now.getUTCDay();
+            const isWeekend = day === 0 || day === 6;
+            const isForexOpen = !isWeekend && (utcH >= 0 && utcH <= 22);
+
+            const dot = document.getElementById('market-dot');
+            const status = document.getElementById('market-status');
+
+            if (isWeekend) {
+                dot.className = 'market-dot offline';
+                status.textContent = 'FECHADO (FDS)';
+            } else if (isForexOpen) {
+                dot.className = 'market-dot online';
+                status.textContent = 'ABERTO';
+            } else {
+                dot.className = 'market-dot offline';
+                status.textContent = 'FECHADO';
+            }
+
+            // Sessions
+            const sessions = [];
+            if (utcH >= 7 && utcH < 16) sessions.push('Londres');
+            if (utcH >= 13 && utcH < 21) sessions.push('Nova York');
+            if (utcH >= 0 && utcH < 9) sessions.push('Tóquio');
+
+            document.getElementById('session-name').textContent = sessions.length > 0 ? sessions.join(' + ') : 'Sem sessão';
+
+            const londonActive = utcH >= 7 && utcH < 16;
+            const nyActive = utcH >= 13 && utcH < 21;
+            const tokyoActive = utcH >= 0 && utcH < 9;
+            const overlapActive = utcH >= 13 && utcH < 16;
+
+            updateSessionStatus('london-status', londonActive);
+            updateSessionStatus('ny-status', nyActive);
+            updateSessionStatus('tokyo-status', tokyoActive);
+            updateSessionStatus('overlap-status', overlapActive);
+        }
+
+        function updateSessionStatus(id, active) {
+            const el = document.getElementById(id);
+            el.textContent = active ? '🟢 ATIVA' : '⚪ Fechada';
+            el.className = 'schedule-status ' + (active ? 'active' : '');
+        }
+
+        // ==================== BOT ENGINE ====================
+
+        const ASSETS = [
+            { name: 'EUR/USD', pip: 0.0001, volatility: 'medium' },
+            { name: 'USD/JPY', pip: 0.01, volatility: 'medium' },
+            { name: 'EUR/GBP', pip: 0.0001, volatility: 'low' },
+            { name: 'GBP/USD', pip: 0.0001, volatility: 'high' },
+            { name: 'BTC/USD', pip: 0.01, volatility: 'high' }
+        ];
+
+        let signalHistory = [];
+        let botStats = { wins: 0, losses: 0, profit: 0, streak: 0, bestStreak: 0 };
+        let signalInterval = null;
+        let countdownInterval = null;
+        let soundEnabled = true;
+        let newsBlocking = false;
+
+        function startBot() {
+            analyzeMarket();
+            signalInterval = setInterval(analyzeMarket, 45000);
+            setInterval(updateIndicatorsDisplay, 5000);
+            updateIndicatorsDisplay();
+            updateSentiment();
+            setInterval(updateSentiment, 30000);
+            calcSupportResistance();
+        }
+
+        function analyzeMarket() {
+            const settings = userData?.settings || {};
+            const minConf = parseInt(settings.minConf) || 5;
+            const ultraOnly = settings.ultraOnly || false;
+
+            if (newsBlocking && settings.newsFilter !== false) return;
+
+            const selectedAssets = [];
+            document.querySelectorAll('.asset-check input:checked').forEach(cb => {
+                const asset = ASSETS.find(a => a.name === cb.value);
+                if (asset) selectedAssets.push(asset);
+            });
+
+            if (selectedAssets.length === 0) return;
+
+            const asset = selectedAssets[Math.floor(Math.random() * selectedAssets.length)];
+            const analysis = runFullAnalysis(asset);
+
+            if (analysis.callScore >= minConf && (!ultraOnly || analysis.callScore >= minConf + 3)) {
+                generateSignal(asset, 'CALL', analysis.callScore, analysis.callConfluences);
+            } else if (analysis.putScore >= minConf && (!ultraOnly || analysis.putScore >= minConf + 3)) {
+                generateSignal(asset, 'PUT', analysis.putScore, analysis.putConfluences);
+            }
+        }
+
+        function runFullAnalysis(asset) {
+            let callScore = 0;
+            let putScore = 0;
+            let callConf = [];
+            let putConf = [];
+
+            // Simular indicadores (em produção viriam de dados reais)
+            const rsi = 20 + Math.random() * 60;
+            const stochK = Math.random() * 100;
+            const stochD = Math.random() * 100;
+            const macdHist = (Math.random() - 0.5) * 0.002;
+            const macdCross = Math.random() > 0.7;
+            const bbPosition = Math.random();
+            const trendUp = Math.random() > 0.45;
+            const trendDown = !trendUp && Math.random() > 0.5;
+            const ma200Above = Math.random() > 0.4;
+            const volumeHigh = Math.random() > 0.4;
+            const bullishCandle = Math.random() > 0.4;
+            const bearishCandle = Math.random() > 0.4;
+            const bullishPattern = Math.random() > 0.7;
+            const bearishPattern = Math.random() > 0.7;
+            const bullishDiv = Math.random() > 0.85;
+            const bearishDiv = Math.random() > 0.85;
+            const notConsolidating = Math.random() > 0.3;
+            const atrOk = Math.random() > 0.2;
+
+            // Update display
+            document.getElementById('ind-rsi').textContent = rsi.toFixed(1);
+            document.getElementById('ind-rsi-fill').style.width = rsi + '%';
+            document.getElementById('ind-rsi-fill').className = 'ind-fill ' +
+                (rsi > 70 ? 'ovb' : rsi < 30 ? 'ovs' : 'normal');
+
+            document.getElementById('ind-stoch').textContent = stochK.toFixed(1);
+            document.getElementById('ind-stoch-fill').style.width = stochK + '%';
+            document.getElementById('ind-stoch-fill').className = 'ind-fill ' +
+                (stochK > 80 ? 'ovb' : stochK < 20 ? 'ovs' : 'normal');
+
+            document.getElementById('ind-macd').textContent = macdHist > 0 ? '📈 Bullish' : '📉 Bearish';
+            document.getElementById('ind-macd').className = 'ind-value ' + (macdHist > 0 ? 'green' : 'red');
+
+            document.getElementById('ind-trend').textContent = trendUp ? '📈 ALTA' : trendDown ? '📉 BAIXA' : '➡️ LATERAL';
+            document.getElementById('ind-trend').className = 'ind-value ' + (trendUp ? 'green' : trendDown ? 'red' : 'neutral');
+
+            document.getElementById('ind-bb').textContent =
+                bbPosition < 0.2 ? '🔽 Banda Inferior' :
+                bbPosition > 0.8 ? '🔼 Banda Superior' : '➡️ Meio';
+
+            document.getElementById('ind-vol').textContent = atrOk ? '✅ Normal' : '⚠️ Extrema';
+
+            // ===== CALL ANALYSIS =====
+            if (rsi < 30) { callScore += 2; callConf.push('✅ RSI Sobrevenda (' + rsi.toFixed(0) + ')'); }
+            else if (rsi < 40) { callScore += 1; callConf.push('✅ RSI Baixo (' + rsi.toFixed(0) + ')'); }
+
+            if (stochK < 20) { callScore += 2; callConf.push('✅ Stoch RSI Sobrevenda'); }
+            else if (stochK < 30 && stochK > stochD) { callScore += 1; callConf.push('✅ Stoch RSI Cruzamento ↑'); }
+
+            if (trendUp) { callScore += 2; callConf.push('✅ Tendência de Alta (MAs)'); }
+            if (ma200Above) { callScore += 1; callConf.push('✅ Acima da MA 200'); }
+
+            if (bbPosition < 0.2) { callScore += 2; callConf.push('✅ Perto da Bollinger Inferior'); }
+            else if (bbPosition < 0.35) { callScore += 1; callConf.push('✅ Zona inferior Bollinger'); }
+
+            if (macdHist > 0 && macdCross) { callScore += 2; callConf.push('✅ MACD Cruzamento Bullish'); }
+            else if (macdHist > 0) { callScore += 1; callConf.push('✅ MACD Positivo'); }
+
+            if (volumeHigh) { callScore += 1; callConf.push('✅ Volume Acima da Média'); }
+            if (bullishCandle) { callScore += 1; callConf.push('✅ Vela Bullish Forte'); }
+            if (bullishPattern) { callScore += 2; callConf.push('✅ Padrão de Reversão Alta'); }
+            if (bullishDiv) { callScore += 3; callConf.push('✅ Divergência Bullish (FORTE)'); }
+            if (notConsolidating) { callScore += 1; callConf.push('✅ Mercado não consolidado'); }
+            if (atrOk) { callScore += 1; callConf.push('✅ Volatilidade adequada'); }
+
+            // ===== PUT ANALYSIS =====
+            if (rsi > 70) { putScore += 2; putConf.push('✅ RSI Sobrecompra (' + rsi.toFixed(0) + ')'); }
+            else if (rsi > 60) { putScore += 1; putConf.push('✅ RSI Alto (' + rsi.toFixed(0) + ')'); }
+
+            if (stochK > 80) { putScore += 2; putConf.push('✅ Stoch RSI Sobrecompra'); }
+            else if (stochK > 70 && stochK < stochD) { putScore += 1; putConf.push('✅ Stoch RSI Cruzamento ↓'); }
+
+            if (trendDown) { putScore += 2; putConf.push('✅ Tendência de Baixa (MAs)'); }
+            if (!ma200Above) { putScore += 1; putConf.push('✅ Abaixo da MA 200'); }
+
+            if (bbPosition > 0.8) { putScore += 2; putConf.push('✅ Perto da Bollinger Superior'); }
+            else if (bbPosition > 0.65) { putScore += 1; putConf.push('✅ Zona superior Bollinger'); }
+
+            if (macdHist < 0 && macdCross) { putScore += 2; putConf.push('✅ MACD Cruzamento Bearish'); }
+            else if (macdHist < 0) { putScore += 1; putConf.push('✅ MACD Negativo'); }
+
+            if (volumeHigh) { putScore += 1; putConf.push('✅ Volume Acima da Média'); }
+            if (bearishCandle) { putScore += 1; putConf.push('✅ Vela Bearish Forte'); }
+            if (bearishPattern) { putScore += 2; putConf.push('✅ Padrão de Reversão Baixa'); }
+            if (bearishDiv) { putScore += 3; putConf.push('✅ Divergência Bearish (FORTE)'); }
+            if (notConsolidating) { putScore += 1; putConf.push('✅ Mercado não consolidado'); }
+            if (atrOk) { putScore += 1; putConf.push('✅ Volatilidade adequada'); }
+
+            return {
+                callScore, putScore,
+                callConfluences: callConf,
+                putConfluences: putConf
+            };
+        }
+
+        function generateSignal(asset, direction, score, confluences) {
+            const now = new Date();
+            const maxScore = 20;
+            const pctScore = Math.min(Math.round((score / maxScore) * 100), 99);
+            const isUltra = score >= 8;
+            const level = score >= 10 ? 'ULTRA ★★★' : score >= 8 ? 'FORTE ★★' : 'FORTE ★';
+
+            // UI Updates
+            const card = document.getElementById('signal-card');
+            card.className = 'signal-card ' + direction.toLowerCase() + (isUltra ? ' ultra' : '');
+
+            document.getElementById('signal-waiting').classList.add('hidden');
+            document.getElementById('signal-active').classList.remove('hidden');
+
+            document.getElementById('signal-badge').textContent = level;
+            document.getElementById('signal-badge').className = 'signal-card-badge ' + (isUltra ? 'ultra' : 'forte');
+
+            document.getElementById('signal-icon').textContent = direction === 'CALL' ? '📈' : '📉';
+            document.getElementById('signal-direction').textContent = direction;
+            document.getElementById('signal-direction-box').className = 'signal-direction-container ' + direction.toLowerCase();
+
+            document.getElementById('sig-asset').textContent = asset.name;
+            document.getElementById('sig-timeframe').textContent = 'M5';
+            document.getElementById('sig-expiry').textContent = '5 min';
+            document.getElementById('sig-time').textContent = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+            document.getElementById('sig-score').textContent = pctScore;
+            document.getElementById('score-fill').style.width = pctScore + '%';
+            document.getElementById('score-fill').className = 'score-fill ' +
+                (pctScore >= 80 ? 'ultra' : pctScore >= 60 ? 'forte' : pctScore >= 40 ? 'medio' : 'fraco');
+
+            // Confluences
+            const confList = document.getElementById('conf-list');
+            confList.innerHTML = '';
+            confluences.forEach(c => {
+                const div = document.createElement('div');
+                div.className = 'conf-item';
+                div.textContent = c;
+                confList.appendChild(div);
+            });
+
+            // Countdown
+            startCountdown(300);
+
+            // Sound
+            if (soundEnabled) playAlert();
+
+            // Save signal
+            const signal = {
+                asset: asset.name,
+                direction,
+                score: pctScore,
+                level,
+                confluences: confluences.length,
+                time: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                timestamp: now.getTime(),
+                result: simulateResult(pctScore)
+            };
+
+            signalHistory.unshift(signal);
+
+            if (signal.result === 'WIN') {
+                botStats.wins++;
+                botStats.streak++;
+                if (botStats.streak > botStats.bestStreak) botStats.bestStreak = botStats.streak;
+            } else {
+                botStats.losses++;
+                botStats.streak = 0;
+            }
+
+            const banca = parseFloat(document.getElementById('input-banca').value) || 100;
+            const risk = parseFloat(document.getElementById('input-risk').value) || 2;
+            const payout = parseFloat(document.getElementById('input-payout').value) || 87;
+            const entry = banca * (risk / 100);
+
+            if (signal.result === 'WIN') {
+                botStats.profit += entry * (payout / 100);
+            } else {
+                botStats.profit -= entry;
+            }
+
+            updateStatsDisplay(botStats);
+            updateHistoryDisplay();
+            saveSignalToFirebase(signal);
+            updateProgress();
+        }
+
+        function simulateResult(score) {
+            const baseRate = 0.55;
+            const bonus = (score / 100) * 0.35;
+            const winChance = baseRate + bonus;
+            return Math.random() < winChance ? 'WIN' : 'LOSS';
+        }
+
+        function startCountdown(seconds) {
+            if (countdownInterval) clearInterval(countdownInterval);
+            let remaining = seconds;
+            const el = document.getElementById('sig-countdown');
+
+            countdownInterval = setInterval(() => {
+                remaining--;
+                const min = Math.floor(remaining / 60);
+                const sec = remaining % 60;
+                el.textContent = min + ':' + (sec < 10 ? '0' : '') + sec;
+
+                if (remaining <= 0) {
+                    clearInterval(countdownInterval);
+                    resetSignalCard();
+                }
+            }, 1000);
+        }
+
+        function resetSignalCard() {
+            document.getElementById('signal-card').className = 'signal-card waiting';
+            document.getElementById('signal-waiting').classList.remove('hidden');
+            document.getElementById('signal-active').classList.add('hidden');
+            document.getElementById('signal-badge').textContent = 'AGUARDANDO';
+            document.getElementById('signal-badge').className = 'signal-card-badge';
+        }
+
+        // ==================== STATS ====================
+
+        function updateStatsDisplay(stats) {
+            document.getElementById('stat-wins').textContent = stats.wins || 0;
+            document.getElementById('stat-losses').textContent = stats.losses || 0;
+            const total = (stats.wins || 0) + (stats.losses || 0);
+            const rate = total > 0 ? Math.round(((stats.wins || 0) / total) * 100) : 0;
+            document.getElementById('stat-rate').textContent = rate + '%';
+            document.getElementById('stat-profit').textContent = '$' + (stats.profit || stats.totalProfit || 0).toFixed(2);
+
+            document.getElementById('perf-total').textContent = total;
+            document.getElementById('perf-streak').textContent = stats.bestStreak || 0;
+            document.getElementById('perf-profit').textContent = '$' + (stats.profit || stats.totalProfit || 0).toFixed(2);
+        }
+
+        function updateHistoryDisplay() {
+            const container = document.getElementById('history-list');
+            if (signalHistory.length === 0) {
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>Nenhum sinal registrado</p></div>';
+                return;
+            }
+            container.innerHTML = '';
+            signalHistory.slice(0, 50).forEach(s => {
+                const div = document.createElement('div');
+                div.className = 'history-item ' + s.result.toLowerCase();
+                div.innerHTML = `
+                    <div class="history-item-left">
+                        <span class="hi-direction ${s.direction.toLowerCase()}">${s.direction === 'CALL' ? '📈' : '📉'} ${s.direction}</span>
+                        <span class="hi-asset">${s.asset}</span>
+                        <span class="hi-level">${s.level}</span>
+                    </div>
+                    <div class="history-item-right">
+                        <span class="hi-score">Score: ${s.score}%</span>
+                        <span class="hi-time">${s.time}</span>
+                        <span class="hi-result ${s.result.toLowerCase()}">${s.result === 'WIN' ? '✅ WIN' : '❌ LOSS'}</span>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // ==================== FIREBASE SAVE ====================
+
+        async function saveSignalToFirebase(signal) {
+            if (!currentUser) return;
+            try {
+                await addDoc(collection(db, "users", currentUser.uid, "signals"), {
+                    ...signal, createdAt: serverTimestamp()
+                });
+                await updateDoc(doc(db, "users", currentUser.uid), {
+                    'stats.wins': botStats.wins,
+                    'stats.losses': botStats.losses,
+                    'stats.totalProfit': parseFloat(botStats.profit.toFixed(2)),
+                    'stats.bestStreak': botStats.bestStreak
+                });
+            } catch (e) { console.log('Save error:', e); }
+        }
+
+        async function loadHistory() {
+            if (!currentUser) return;
+            try {
+                const q = query(
+                    collection(db, "users", currentUser.uid, "signals"),
+                    orderBy("createdAt", "desc"), limit(50)
+                );
+                const snap = await getDocs(q);
+                snap.forEach(d => {
+                    signalHistory.push(d.data());
+                });
+                updateHistoryDisplay();
+            } catch (e) { console.log('Load error:', e); }
+        }
+
+        // ==================== ECONOMIC CALENDAR ====================
+
+        async function loadEconomicCalendar() {
+            const newsList = document.getElementById('news-list');
+
+            const fakeNews = generateEconomicNews();
+            newsList.innerHTML = '';
+
+            fakeNews.forEach(news => {
+                const div = document.createElement('div');
+                div.className = 'news-item ' + news.impact;
+                div.innerHTML = `
+                    <div class="news-time">${news.time}</div>
+                    <div class="news-info">
+                        <div class="news-currency">${news.currency}</div>
+                        <div class="news-title">${news.title}</div>
+                    </div>
+                    <div class="news-impact">
+                        <span class="impact-dot ${news.impact}"></span>
+                        ${news.impact === 'high' ? 'ALTO' : news.impact === 'medium' ? 'MÉDIO' : 'BAIXO'}
+                    </div>
+                `;
+                newsList.appendChild(div);
+
+                if (news.impact === 'high' && news.soon) {
+                    showNewsAlert(news);
+                }
+            });
+        }
+
+        function generateEconomicNews() {
+            const now = new Date();
+            const h = now.getHours();
+
+            return [
+                { time: (h+1) + ':00', currency: '🇺🇸 USD', title: 'Non-Farm Payrolls', impact: 'high', soon: true },
+                { time: (h+2) + ':30', currency: '🇺🇸 USD', title: 'Taxa de Desemprego', impact: 'high', soon: false },
+                { time: (h+1) + ':15', currency: '🇪🇺 EUR', title: 'CPI (Inflação)', impact: 'high', soon: true },
+                { time: (h+3) + ':00', currency: '🇬🇧 GBP', title: 'Decisão de Juros BOE', impact: 'high', soon: false },
+                { time: (h+1) + ':30', currency: '🇺🇸 USD', title: 'PIB Trimestral', impact: 'medium', soon: false },
+                { time: (h+2) + ':00', currency: '🇪🇺 EUR', title: 'PMI Manufatura', impact: 'medium', soon: false },
+                { time: (h+4) + ':00', currency: '🇯🇵 JPY', title: 'Balança Comercial', impact: 'low', soon: false },
+                { time: (h+3) + ':30', currency: '🇺🇸 USD', title: 'Pedidos de Seguro Desemprego', impact: 'low', soon: false },
+            ];
+        }
+
+        function showNewsAlert(news) {
+            newsBlocking = true;
+            const alert = document.getElementById('news-alert');
+            alert.classList.remove('hidden');
+            document.getElementById('news-alert-detail').textContent =
+                `${news.currency} — ${news.title} às ${news.time}`;
+            document.getElementById('news-alert-time').textContent = news.time;
+
+            setTimeout(() => {
+                alert.classList.add('hidden');
+                newsBlocking = false;
+            }, 60000);
+        }
+
+        // ==================== SENTIMENT ====================
+
+        function updateSentiment() {
+            const bulls = 35 + Math.floor(Math.random() * 30);
+            const bears = 100 - bulls;
+
+            document.getElementById('sentiment-bulls').style.width = bulls + '%';
+            document.getElementById('bulls-pct').textContent = bulls + '%';
+            document.getElementById('bears-pct').textContent = bears + '%';
+
+            const verdict = document.getElementById('sentiment-verdict');
+            if (bulls > 60) { verdict.textContent = '🐂 BULLISH'; verdict.className = 'sentiment-verdict green'; }
+            else if (bears > 60) { verdict.textContent = '🐻 BEARISH'; verdict.className = 'sentiment-verdict red'; }
+            else { verdict.textContent = '⚖️ NEUTRO'; verdict.className = 'sentiment-verdict neutral'; }
+        }
+
+        // ==================== SUPPORT & RESISTANCE ====================
+
+        function calcSupportResistance() {
+            const price = 1.0850 + (Math.random() * 0.01);
+            const h = price + 0.002;
+            const l = price - 0.002;
+            const pivot = (h + l + price) / 3;
+
+            document.getElementById('sr-pivot').textContent = pivot.toFixed(5);
+            document.getElementById('sr-r1').textContent = (2 * pivot - l).toFixed(5);
+            document.getElementById('sr-r2').textContent = (pivot + (h - l)).toFixed(5);
+            document.getElementById('sr-r3').textContent = (h + 2 * (pivot - l)).toFixed(5);
+            document.getElementById('sr-s1').textContent = (2 * pivot - h).toFixed(5);
+            document.getElementById('sr-s2').textContent = (pivot - (h - l)).toFixed(5);
+            document.getElementById('sr-s3').textContent = (l - 2 * (h - pivot)).toFixed(5);
+        }
+
+        // ==================== BANCA ====================
+
+        window.calcBanca = function() {
+            const banca = parseFloat(document.getElementById('input-banca').value) || 100;
+            const risk = parseFloat(document.getElementById('input-risk').value) || 2;
+            const payout = parseFloat(document.getElementById('input-payout').value) || 87;
+
+            const entry = banca * (risk / 100);
+            const sl = banca * 0.10;
+            const sg = banca * 0.20;
+            const maxOps = Math.floor(sl / entry);
+            const winProfit = entry * (payout / 100);
+
+            document.getElementById('banca-entry').textContent = '$' + entry.toFixed(2);
+            document.getElementById('banca-sl').textContent = '-$' + sl.toFixed(2);
+            document.getElementById('banca-sg').textContent = '+$' + sg.toFixed(2);
+            document.getElementById('banca-maxops').textContent = maxOps;
+            document.getElementById('banca-win-profit').textContent = '+$' + winProfit.toFixed(2);
+
+            document.getElementById('prog-meta').textContent = '+$' + sg.toFixed(2);
+
+            // Martingale
+            let mgEntry = entry;
+            let mgTotal = 0;
+            for (let i = 0; i < 3; i++) {
+                mgTotal += mgEntry;
+                const mgProfit = (mgEntry * (payout / 100)) - mgTotal + mgEntry;
+                document.getElementById('mg-entry-' + i).textContent = '$' + mgEntry.toFixed(2);
+                document.getElementById('mg-total-' + i).textContent = '$' + mgTotal.toFixed(2);
+                document.getElementById('mg-profit-' + i).textContent = '+$' + mgProfit.toFixed(2);
+                mgEntry = Math.ceil(((mgTotal) / (payout / 100)) * 100) / 100;
+            }
+
+            if (currentUser) {
+                updateDoc(doc(db, "users", currentUser.uid), {
+                    'banca.value': banca, 'banca.risk': risk, 'banca.payout': payout
+                }).catch(() => {});
+            }
+        }
+
+        // ==================== PROGRESS ====================
+
+        function updateProgress() {
+            const banca = parseFloat(document.getElementById('input-banca').value) || 100;
+            const meta = banca * 0.20;
+            const current = botStats.profit;
+            const pct = Math.min(Math.max(Math.round((current / meta) * 100), 0), 100);
+
+            document.getElementById('progress-pct').textContent = pct + '%';
+            document.getElementById('prog-current').textContent = '$' + current.toFixed(2);
+            document.getElementById('prog-ops').textContent = (botStats.wins + botStats.losses) + '/' + (document.getElementById('banca-maxops')?.textContent || 5);
+
+            const ring = document.getElementById('progress-ring');
+            const circumference = 2 * Math.PI * 54;
+            ring.style.strokeDasharray = circumference;
+            ring.style.strokeDashoffset = circumference - (pct / 100) * circumference;
+        }
+
+        // ==================== INDICATORS DISPLAY ====================
+
+        function updateIndicatorsDisplay() {
+            // Already updated in runFullAnalysis
+        }
+
+        // ==================== SOUND ====================
+
+        function playAlert() {
+            try {
+                const audio = document.getElementById('alert-sound');
+                audio.currentTime = 0;
+                audio.play().catch(() => {});
+            } catch (e) {}
+        }
+
+        window.toggleSound = function() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('btn-sound');
+            btn.innerHTML = soundEnabled ?
+                '<i class="fas fa-volume-up"></i>' :
+                '<i class="fas fa-volume-mute"></i>';
+        }
+
+        // ==================== NAVIGATION ====================
+
+        window.showPage = function(page, btn) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            if (btn) {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+        }
+
+        window.showLogin = function() {
+            document.getElementById('login-tab').classList.add('active');
+            document.getElementById('register-tab').classList.remove('active');
+            document.querySelectorAll('.form-tabs .tab-btn').forEach((b, i) => {
+                b.classList.toggle('active', i === 0);
+            });
+        }
+
+        window.showRegister = function() {
+            document.getElementById('register-tab').classList.add('active');
+            document.getElementById('login-tab').classList.remove('active');
+            document.querySelectorAll('.form-tabs .tab-btn').forEach((b, i) => {
+                b.classList.toggle('active', i === 1);
+            });
+        }
+
+        window.filterHistory = function(filter, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // Filter logic
+            const items = document.querySelectorAll('.history-item');
+            items.forEach(item => {
+                if (filter === 'all') { item.style.display = ''; }
+                else if (filter === 'win') { item.style.display = item.classList.contains('win') ? '' : 'none'; }
+                else if (filter === 'loss') { item.style.display = item.classList.contains('loss') ? '' : 'none'; }
+                else if (filter === 'call') { item.style.display = item.innerHTML.includes('CALL') ? '' : 'none'; }
+                else if (filter === 'put') { item.style.display = item.innerHTML.includes('PUT') ? '' : 'none'; }
+            });
+        }
+
+        window.saveSetting = async function(key, value) {
+            if (!currentUser) return;
+            try {
+                await updateDoc(doc(db, "users", currentUser.uid), {
+                    ['settings.' + key]: value
+                });
+                if (userData.settings) userData.settings[key] = value;
+            } catch (e) {}
+        }
+
+        // ==================== HELPERS ====================
+
+        function showError(msg) {
+            const el = document.getElementById('login-error');
+            el.textContent = msg;
+            el.style.display = msg ? 'block' : 'none';
+            if (msg) document.getElementById('login-success').style.display = 'none';
+        }
+
+        function showSuccess(msg) {
+            const el = document.getElementById('login-success');
+            el.textContent = msg;
+            el.style.display = msg ? 'block' : 'none';
+        }
+
+        function getErrorMsg(code) {
+            const m = {
+                'auth/email-already-in-use': '❌ Este email já está cadastrado',
+                'auth/weak-password': '❌ Senha muito fraca',
+                'auth/invalid-email': '❌ Email inválido',
+                'auth/user-not-found': '❌ Usuário não encontrado',
+                'auth/wrong-password': '❌ Senha incorreta',
+                'auth/invalid-credential': '❌ Email ou senha incorretos',
+                'auth/too-many-requests': '⏳ Muitas tentativas. Aguarde.'
+            };
+            return m[code] || '❌ Erro: ' + code;
+        }
+
+        // Splash timeout
+        setTimeout(() => {
+            document.getElementById('splash-screen').classList.remove('active');
+        }, 3000);
+
+    </script>
+</body>
+</html>
