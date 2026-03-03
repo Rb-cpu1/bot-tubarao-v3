@@ -1,0 +1,19 @@
+{
+    "name": "Bot Tubarão V3 Ultimate",
+    "short_name": "Tubarão V3",
+    "description": "Sistema Estratégico de Sinais Inteligentes para IQ Option",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050810",
+    "theme_color": "#050810",
+    "orientation": "portrait",
+    "categories": ["finance", "business"],
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦈</text></svg>",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}
