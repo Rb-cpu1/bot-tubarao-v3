@@ -1,13 +1,12 @@
 {
-    "name": "Bot Tubarão V3 Ultimate",
+    "name": "Bot Tubarão V3 — IA Trading",
     "short_name": "Tubarão V3",
-    "description": "Sistema Estratégico de Sinais Inteligentes para IQ Option",
+    "description": "Sistema de IA para Trading",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#050810",
     "theme_color": "#050810",
     "orientation": "portrait",
-    "categories": ["finance", "business"],
     "icons": [
         {
             "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦈</text></svg>",
