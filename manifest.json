@@ -1,11 +1,11 @@
 {
     "name": "Bot Tubarão V3 — IA Trading",
-    "short_name": "Tubarão V3",
-    "description": "Sistema de IA para Trading",
+    "short_name": "Bot Tubarão",
+    "description": "Sistema de Inteligência Artificial para Trading",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#050810",
-    "theme_color": "#050810",
+    "background_color": "#030508",
+    "theme_color": "#030508",
     "orientation": "portrait",
     "icons": [
         {
