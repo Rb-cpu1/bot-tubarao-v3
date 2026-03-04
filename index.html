@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Bot Tubarão V3 — IA Trading System</title>
+    <title>Bot Tubarão V3</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#050810">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js"></script>
@@ -17,935 +16,512 @@
 
     <!-- SPLASH -->
     <div id="splash" class="splash active">
-        <div class="splash-content">
-            <div class="splash-shark">🦈</div>
-            <h1 class="splash-title">BOT TUBARÃO</h1>
-            <div class="splash-badge">V3 • INTELIGÊNCIA ARTIFICIAL</div>
-            <div class="splash-loader"><div class="splash-bar"></div></div>
-            <p class="splash-msg" id="splash-msg">Inicializando sistema...</p>
+        <div class="splash-c">
+            <div class="sp-shark">🦈</div>
+            <h1 class="sp-title">BOT TUBARÃO</h1>
+            <div class="sp-badge">V3 • INTELIGÊNCIA ARTIFICIAL</div>
+            <div class="sp-loader"><div class="sp-bar"></div></div>
+            <p class="sp-msg">Conectando à IA...</p>
         </div>
     </div>
 
     <!-- LOGIN -->
-    <div id="screen-login" class="screen">
-        <div class="login-particles">
-            <div class="lp"></div><div class="lp"></div><div class="lp"></div>
-            <div class="lp"></div><div class="lp"></div>
-        </div>
-        <div class="login-wrap">
-            <div class="login-logo">
-                <div class="ll-icon">🦈</div>
-                <h1 class="ll-title">BOT TUBARÃO</h1>
-                <div class="ll-badge">V3 ULTIMATE • IA</div>
-                <p class="ll-tag">Inteligência Artificial aplicada ao mercado financeiro</p>
+    <div id="scr-login" class="scr">
+        <div class="lg-fx"><div class="lp"></div><div class="lp"></div><div class="lp"></div></div>
+        <div class="lg-wrap">
+            <div class="lg-logo">
+                <div class="lg-icon">🦈</div>
+                <h1 class="lg-title">BOT TUBARÃO</h1>
+                <div class="lg-badge">V3 ULTIMATE</div>
+                <p class="lg-sub">O sistema de IA que transforma o mercado financeiro em oportunidade</p>
+                <div class="lg-proof">
+                    <div class="proof-i"><i class="fas fa-brain"></i><span>IA Avançada</span></div>
+                    <div class="proof-i"><i class="fas fa-chart-line"></i><span>Sinais Precisos</span></div>
+                    <div class="proof-i"><i class="fas fa-shield-alt"></i><span>100% Seguro</span></div>
+                </div>
             </div>
-            <div class="login-box">
-                <div class="login-tabs">
-                    <button class="lt-btn active" onclick="switchTab('login')">ENTRAR</button>
-                    <button class="lt-btn" onclick="switchTab('register')">CADASTRAR</button>
+            <div class="lg-box">
+                <div class="lg-tabs">
+                    <button class="lgt active" onclick="swTab('login')">ENTRAR</button>
+                    <button class="lgt" onclick="swTab('register')">CRIAR CONTA</button>
                 </div>
-                <div id="tab-login" class="tab-content active">
-                    <div class="field"><i class="fas fa-envelope"></i><input type="email" id="l-email" placeholder="Email"></div>
-                    <div class="field"><i class="fas fa-lock"></i><input type="password" id="l-pass" placeholder="Senha"></div>
-                    <button class="btn-main" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> ENTRAR</button>
+                <div id="tab-login" class="tabc active">
+                    <div class="inp"><i class="fas fa-envelope"></i><input type="email" id="l-email" placeholder="Seu email"></div>
+                    <div class="inp"><i class="fas fa-lock"></i><input type="password" id="l-pass" placeholder="Sua senha"></div>
+                    <button class="btn-go" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> ACESSAR SISTEMA</button>
                 </div>
-                <div id="tab-register" class="tab-content">
-                    <div class="field"><i class="fas fa-user"></i><input type="text" id="r-name" placeholder="Nome completo"></div>
-                    <div class="field"><i class="fas fa-envelope"></i><input type="email" id="r-email" placeholder="Email"></div>
-                    <div class="field"><i class="fas fa-lock"></i><input type="password" id="r-pass" placeholder="Senha (mín. 6)"></div>
-                    <div class="field"><i class="fas fa-key"></i><input type="text" id="r-key" placeholder="Chave de licença"></div>
-                    <button class="btn-main" onclick="doRegister()"><i class="fas fa-rocket"></i> ATIVAR LICENÇA</button>
+                <div id="tab-register" class="tabc">
+                    <div class="inp"><i class="fas fa-user"></i><input type="text" id="r-name" placeholder="Seu nome"></div>
+                    <div class="inp"><i class="fas fa-envelope"></i><input type="email" id="r-email" placeholder="Seu email"></div>
+                    <div class="inp"><i class="fas fa-lock"></i><input type="password" id="r-pass" placeholder="Criar senha (mín. 6)"></div>
+                    <div class="inp"><i class="fas fa-key"></i><input type="text" id="r-key" placeholder="Código de ativação"></div>
+                    <button class="btn-go" onclick="doRegister()"><i class="fas fa-rocket"></i> ATIVAR AGORA</button>
                 </div>
-                <div id="auth-error" class="auth-msg error"></div>
-                <div id="auth-success" class="auth-msg success"></div>
+                <div id="auth-err" class="amsg err"></div>
+                <div id="auth-ok" class="amsg ok"></div>
             </div>
-            <p class="login-footer">🔒 Sistema protegido com criptografia</p>
+            <div class="lg-footer">
+                <div class="lg-trust">
+                    <span>🔒 Criptografado</span>
+                    <span>⚡ Tempo real</span>
+                    <span>🧠 IA Ativa</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- APP PRINCIPAL -->
-    <div id="screen-app" class="screen">
+    <!-- APP -->
+    <div id="scr-app" class="scr">
         <!-- Header -->
         <header class="hdr">
-            <div class="hdr-left">
-                <span class="hdr-shark">🦈</span>
-                <div><span class="hdr-name">TUBARÃO</span><span class="hdr-ver">V3 • IA</span></div>
+            <div class="hdr-l">
+                <span class="hdr-s">🦈</span>
+                <div><span class="hdr-n">BOT TUBARÃO</span><span class="hdr-v">V3 • IA</span></div>
             </div>
-            <div class="hdr-mid">
-                <span class="hdr-status" id="hdr-status"><span class="dot-on"></span>ONLINE</span>
-            </div>
-            <div class="hdr-right">
-                <button class="hdr-btn" id="btn-sound" onclick="toggleMute()"><i class="fas fa-volume-up"></i></button>
-                <button class="hdr-btn" onclick="goPage('settings')"><i class="fas fa-cog"></i></button>
-                <button class="hdr-btn hdr-logout" onclick="doLogout()"><i class="fas fa-power-off"></i></button>
+            <div class="hdr-r">
+                <button class="hdr-b" id="btn-snd" onclick="togMute()"><i class="fas fa-volume-up"></i></button>
+                <button class="hdr-b hdr-out" onclick="doLogout()"><i class="fas fa-power-off"></i></button>
             </div>
         </header>
 
-        <!-- Pages -->
-        <main class="main">
-            <!-- PAGE: DASHBOARD -->
-            <section id="pg-dashboard" class="pg active">
-                <!-- Welcome -->
-                <div class="welcome">
+        <main class="content">
+            <!-- Welcome -->
+            <div class="hero">
+                <div class="hero-top">
                     <div>
-                        <span class="w-hi">Olá, <strong id="w-name">Trader</strong></span>
-                        <span class="w-date" id="w-date">--</span>
+                        <span class="hero-hi">Olá, <strong id="hero-name">Trader</strong> 👋</span>
+                        <span class="hero-date" id="hero-date">--</span>
                     </div>
-                    <span class="w-plan" id="w-plan">PRO</span>
-                </div>
-
-                <!-- Market Info -->
-                <div class="mkt-bar">
-                    <div class="mkt-i"><i class="fas fa-clock"></i><span id="mkt-time">--:--:--</span></div>
-                    <div class="mkt-i"><span class="mkt-dot" id="mkt-dot"></span><span id="mkt-state">--</span></div>
-                    <div class="mkt-i"><i class="fas fa-globe"></i><span id="mkt-session">--</span></div>
-                </div>
-
-                <!-- AI Status -->
-                <div class="ai-bar">
-                    <div class="ai-icon"><i class="fas fa-brain"></i></div>
-                    <div class="ai-info">
-                        <span class="ai-label">MOTOR DE IA</span>
-                        <span class="ai-state" id="ai-state">Inicializando TensorFlow.js...</span>
+                    <div class="hero-status">
+                        <span class="dot-live"></span>
+                        <span id="hero-mkt">MERCADO ABERTO</span>
                     </div>
-                    <div class="ai-indicator" id="ai-indicator"></div>
                 </div>
-
-                <!-- News Alert -->
-                <div id="news-warn" class="news-warn hide">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <div><strong>⚠️ NOTÍCIA DE ALTO IMPACTO</strong><span id="news-warn-txt">--</span></div>
-                    <span id="news-warn-time">--</span>
+                <div class="hero-msg">
+                    <div class="hero-msg-icon">💰</div>
+                    <p class="hero-msg-txt">Seu próximo lucro está a um sinal de distância. A IA está analisando o mercado para você.</p>
                 </div>
+            </div>
 
-                <!-- Signal Card -->
-                <div id="sig-card" class="sig-card idle">
-                    <div class="sig-top">
-                        <div class="sig-top-left"><i class="fas fa-satellite-dish"></i><span>SINAL ATIVO</span></div>
-                        <span class="sig-badge" id="sig-badge">AGUARDANDO</span>
+            <!-- AI Status -->
+            <div class="ai-status">
+                <div class="ai-s-icon"><i class="fas fa-brain"></i></div>
+                <div class="ai-s-info">
+                    <span class="ai-s-label">MOTOR DE INTELIGÊNCIA ARTIFICIAL</span>
+                    <span class="ai-s-state" id="ai-state">Inicializando...</span>
+                </div>
+                <div class="ai-s-dot" id="ai-dot"></div>
+            </div>
+
+            <!-- Asset Selector -->
+            <div class="asset-selector">
+                <div class="as-title"><i class="fas fa-coins"></i> ESCOLHA O ATIVO</div>
+                <div class="as-grid" id="asset-grid">
+                    <button class="as-btn active" data-pair="EUR/USD" onclick="selectAsset(this)">
+                        <span class="as-flag">🇪🇺🇺🇸</span>
+                        <span class="as-name">EUR/USD</span>
+                        <span class="as-price" id="price-EUR/USD">--</span>
+                    </button>
+                    <button class="as-btn" data-pair="USD/JPY" onclick="selectAsset(this)">
+                        <span class="as-flag">🇺🇸🇯🇵</span>
+                        <span class="as-name">USD/JPY</span>
+                        <span class="as-price" id="price-USD/JPY">--</span>
+                    </button>
+                    <button class="as-btn" data-pair="GBP/USD" onclick="selectAsset(this)">
+                        <span class="as-flag">🇬🇧🇺🇸</span>
+                        <span class="as-name">GBP/USD</span>
+                        <span class="as-price" id="price-GBP/USD">--</span>
+                    </button>
+                    <button class="as-btn" data-pair="EUR/GBP" onclick="selectAsset(this)">
+                        <span class="as-flag">🇪🇺🇬🇧</span>
+                        <span class="as-name">EUR/GBP</span>
+                        <span class="as-price" id="price-EUR/GBP">--</span>
+                    </button>
+                    <button class="as-btn" data-pair="AUD/USD" onclick="selectAsset(this)">
+                        <span class="as-flag">🇦🇺🇺🇸</span>
+                        <span class="as-name">AUD/USD</span>
+                        <span class="as-price" id="price-AUD/USD">--</span>
+                    </button>
+                    <button class="as-btn" data-pair="BTC/USD" onclick="selectAsset(this)">
+                        <span class="as-flag">₿💲</span>
+                        <span class="as-name">BTC/USD</span>
+                        <span class="as-price" id="price-BTC/USD">--</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mini Chart -->
+            <div class="chart-box">
+                <div class="chart-header">
+                    <span class="chart-pair" id="chart-pair">EUR/USD</span>
+                    <span class="chart-tf">M5</span>
+                </div>
+                <canvas id="chart" height="180"></canvas>
+            </div>
+
+            <!-- Signal Card -->
+            <div id="sig-card" class="sig-card idle">
+                <div class="sig-header">
+                    <div class="sig-h-left">
+                        <i class="fas fa-satellite-dish"></i>
+                        <span>SINAL DA IA</span>
                     </div>
-                    <div class="sig-body">
-                        <!-- Waiting State -->
-                        <div id="sig-wait" class="sig-wait">
-                            <div class="radar"><div class="radar-c"></div><div class="radar-c"></div><div class="radar-c"></div><div class="radar-s"></div><div class="radar-m">🦈</div></div>
-                            <p class="sig-wait-t">Analisando mercado com IA...</p>
-                            <p class="sig-wait-s">15 indicadores + rede neural ativa</p>
+                    <span class="sig-level" id="sig-level">AGUARDANDO</span>
+                </div>
+                <div class="sig-body">
+                    <!-- Waiting -->
+                    <div id="sig-wait" class="sig-wait">
+                        <div class="radar">
+                            <div class="rc"></div><div class="rc"></div><div class="rc"></div>
+                            <div class="rs"></div>
+                            <div class="rm">🦈</div>
                         </div>
-                        <!-- Active Signal -->
-                        <div id="sig-live" class="sig-live hide">
-                            <div class="sig-dir" id="sig-dir-box">
-                                <span class="sig-dir-icon" id="sig-dir-icon">📈</span>
-                                <span class="sig-dir-txt" id="sig-dir-txt">CALL</span>
+                        <p class="sw-t1">A IA está analisando o mercado...</p>
+                        <p class="sw-t2">Aguarde o próximo sinal de alta precisão</p>
+                    </div>
+                    <!-- Active -->
+                    <div id="sig-active" class="sig-active hide">
+                        <div class="sig-dir" id="sig-dir">
+                            <span class="sd-icon" id="sd-icon">📈</span>
+                            <span class="sd-txt" id="sd-txt">CALL</span>
+                            <span class="sd-sub">ENTRADA AGORA</span>
+                        </div>
+                        <div class="sig-info">
+                            <div class="si-item">
+                                <span class="si-label">ATIVO</span>
+                                <span class="si-val" id="si-asset">EUR/USD</span>
                             </div>
-                            <div class="sig-grid">
-                                <div class="sg-i"><span class="sg-l">ATIVO</span><span class="sg-v" id="sg-asset">--</span></div>
-                                <div class="sg-i"><span class="sg-l">TIMEFRAME</span><span class="sg-v" id="sg-tf">M5</span></div>
-                                <div class="sg-i"><span class="sg-l">EXPIRAÇÃO</span><span class="sg-v" id="sg-exp">5 min</span></div>
-                                <div class="sg-i"><span class="sg-l">HORA</span><span class="sg-v" id="sg-time">--:--</span></div>
+                            <div class="si-item">
+                                <span class="si-label">TIMEFRAME</span>
+                                <span class="si-val">M5</span>
                             </div>
-                            <!-- AI Score -->
-                            <div class="ai-score-box">
-                                <div class="as-top"><span>🧠 SCORE DA IA</span><span class="as-val" id="as-val">0</span></div>
-                                <div class="as-bar"><div class="as-fill" id="as-fill"></div></div>
-                                <div class="as-labels"><span>Fraco</span><span>Médio</span><span>Forte</span><span>Ultra</span></div>
+                            <div class="si-item">
+                                <span class="si-label">EXPIRAÇÃO</span>
+                                <span class="si-val">5 minutos</span>
                             </div>
-                            <!-- Regime -->
-                            <div class="regime-box">
-                                <span class="regime-label">REGIME DE MERCADO</span>
-                                <span class="regime-val" id="regime-val">--</span>
-                            </div>
-                            <!-- Confluences -->
-                            <div class="conf-box">
-                                <span class="conf-title">CONFLUÊNCIAS DETECTADAS</span>
-                                <div class="conf-list" id="conf-list"></div>
-                            </div>
-                            <!-- AI Analysis -->
-                            <div class="ai-analysis-box">
-                                <span class="aa-title">🧠 ANÁLISE DA IA</span>
-                                <p class="aa-text" id="aa-text">--</p>
-                            </div>
-                            <!-- Countdown -->
-                            <div class="sig-countdown">
-                                <span class="sc-label">Expira em</span>
-                                <span class="sc-val" id="sc-val">5:00</span>
+                            <div class="si-item">
+                                <span class="si-label">HORA</span>
+                                <span class="si-val" id="si-time">--:--</span>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Stats -->
-                <div class="stats-r">
-                    <div class="st win"><i class="fas fa-check"></i><span class="st-v" id="st-w">0</span><span class="st-l">Wins</span></div>
-                    <div class="st loss"><i class="fas fa-times"></i><span class="st-v" id="st-l">0</span><span class="st-l">Loss</span></div>
-                    <div class="st rate"><i class="fas fa-bullseye"></i><span class="st-v" id="st-r">0%</span><span class="st-l">Taxa</span></div>
-                    <div class="st prof"><i class="fas fa-dollar-sign"></i><span class="st-v" id="st-p">$0</span><span class="st-l">Lucro</span></div>
-                </div>
-
-                <!-- Technical Indicators -->
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-chart-line"></i><span>INDICADORES TÉCNICOS (TEMPO REAL)</span></div>
-                    <div class="ind-grid">
-                        <div class="ind-i"><span class="ind-n">RSI (14)</span><div class="ind-bar"><div class="ind-f" id="ind-rsi-f"></div></div><span class="ind-v" id="ind-rsi">--</span></div>
-                        <div class="ind-i"><span class="ind-n">Stoch RSI</span><div class="ind-bar"><div class="ind-f" id="ind-stoch-f"></div></div><span class="ind-v" id="ind-stoch">--</span></div>
-                        <div class="ind-i"><span class="ind-n">MACD</span><span class="ind-v" id="ind-macd">--</span></div>
-                        <div class="ind-i"><span class="ind-n">ADX</span><div class="ind-bar"><div class="ind-f" id="ind-adx-f"></div></div><span class="ind-v" id="ind-adx">--</span></div>
-                        <div class="ind-i"><span class="ind-n">ATR</span><span class="ind-v" id="ind-atr">--</span></div>
-                        <div class="ind-i"><span class="ind-n">Bollinger</span><span class="ind-v" id="ind-bb">--</span></div>
-                        <div class="ind-i"><span class="ind-n">Tendência</span><span class="ind-v" id="ind-trend">--</span></div>
-                        <div class="ind-i"><span class="ind-n">🧠 IA Previsão</span><span class="ind-v" id="ind-ai">--</span></div>
-                    </div>
-                </div>
-
-                <!-- Market Sentiment -->
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-brain"></i><span>SENTIMENTO DO MERCADO (IA)</span></div>
-                    <div class="sent-wrap">
-                        <div class="sent-bar-wrap">
-                            <span class="sent-lbl bears">🐻 Bears</span>
-                            <div class="sent-bar"><div class="sent-fill" id="sent-fill"></div></div>
-                            <span class="sent-lbl bulls">Bulls 🐂</span>
+                        <!-- AI Confidence -->
+                        <div class="ai-conf">
+                            <div class="ac-top">
+                                <span>🧠 CONFIANÇA DA IA</span>
+                                <span class="ac-pct" id="ac-pct">0%</span>
+                            </div>
+                            <div class="ac-bar"><div class="ac-fill" id="ac-fill"></div></div>
                         </div>
-                        <div class="sent-vals">
-                            <span id="sent-bear">50%</span>
-                            <span class="sent-verdict" id="sent-verdict">NEUTRO</span>
-                            <span id="sent-bull">50%</span>
+
+                        <!-- Confluences (simplified) -->
+                        <div class="sig-reasons">
+                            <span class="sr-title">POR QUE ESTE SINAL?</span>
+                            <div class="sr-list" id="sr-list"></div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Support & Resistance -->
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-layer-group"></i><span>SUPORTE & RESISTÊNCIA (AUTO)</span></div>
-                    <div class="sr-wrap">
-                        <div class="sr r3"><span class="sr-l">R3</span><span class="sr-v" id="sr-r3">--</span></div>
-                        <div class="sr r2"><span class="sr-l">R2</span><span class="sr-v" id="sr-r2">--</span></div>
-                        <div class="sr r1"><span class="sr-l">R1</span><span class="sr-v" id="sr-r1">--</span></div>
-                        <div class="sr pv"><span class="sr-l">PIVOT</span><span class="sr-v" id="sr-pv">--</span></div>
-                        <div class="sr s1"><span class="sr-l">S1</span><span class="sr-v" id="sr-s1">--</span></div>
-                        <div class="sr s2"><span class="sr-l">S2</span><span class="sr-v" id="sr-s2">--</span></div>
-                        <div class="sr s3"><span class="sr-l">S3</span><span class="sr-v" id="sr-s3">--</span></div>
-                    </div>
-                </div>
-
-                <!-- Price Chart (Mini) -->
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-chart-area"></i><span>GRÁFICO DE PREÇO (SIMULADO)</span></div>
-                    <div class="chart-wrap">
-                        <canvas id="price-chart" height="200"></canvas>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PAGE: HISTORY -->
-            <section id="pg-history" class="pg">
-                <div class="pg-title"><i class="fas fa-history"></i> HISTÓRICO DE SINAIS</div>
-                <div class="filters">
-                    <button class="fil active" onclick="fil('all',this)">Todos</button>
-                    <button class="fil" onclick="fil('win',this)">✅ Win</button>
-                    <button class="fil" onclick="fil('loss',this)">❌ Loss</button>
-                    <button class="fil" onclick="fil('call',this)">📈 Call</button>
-                    <button class="fil" onclick="fil('put',this)">📉 Put</button>
-                </div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-chart-area"></i><span>PERFORMANCE</span></div>
-                    <div class="perf-stats">
-                        <div class="ps"><span class="ps-l">Sinais</span><span class="ps-v" id="ps-total">0</span></div>
-                        <div class="ps"><span class="ps-l">Melhor Sequência</span><span class="ps-v green" id="ps-streak">0</span></div>
-                        <div class="ps"><span class="ps-l">Lucro Total</span><span class="ps-v" id="ps-profit">$0</span></div>
-                    </div>
-                </div>
-                <div class="card"><div id="hist-list" class="hist-list"><div class="empty"><i class="fas fa-inbox"></i><p>Sem sinais ainda</p></div></div></div>
-            </section>
-
-            <!-- PAGE: CALENDAR -->
-            <section id="pg-calendar" class="pg">
-                <div class="pg-title"><i class="fas fa-calendar-alt"></i> CALENDÁRIO ECONÔMICO</div>
-                <div class="legend">
-                    <span class="leg-i"><span class="leg-d high"></span>Alto</span>
-                    <span class="leg-i"><span class="leg-d med"></span>Médio</span>
-                    <span class="leg-i"><span class="leg-d low"></span>Baixo</span>
-                </div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-newspaper"></i><span>NOTÍCIAS DE HOJE</span></div>
-                    <div id="news-list" class="news-list"></div>
-                </div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-clock"></i><span>SESSÕES DE MERCADO</span></div>
-                    <div class="sessions">
-                        <div class="sess"><span class="sess-flag">🇬🇧</span><div class="sess-info"><strong>Londres</strong><span>04:00 - 12:00 UTC-3</span></div><span class="sess-st" id="sess-ldn">--</span></div>
-                        <div class="sess"><span class="sess-flag">🇺🇸</span><div class="sess-info"><strong>Nova York</strong><span>09:30 - 16:00 UTC-3</span></div><span class="sess-st" id="sess-ny">--</span></div>
-                        <div class="sess"><span class="sess-flag">🇯🇵</span><div class="sess-info"><strong>Tóquio</strong><span>20:00 - 04:00 UTC-3</span></div><span class="sess-st" id="sess-tky">--</span></div>
-                        <div class="sess overlap"><span class="sess-flag">⚡</span><div class="sess-info"><strong>Overlap LDN+NY</strong><span>09:30 - 12:00 UTC-3</span></div><span class="sess-st" id="sess-ovl">--</span></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PAGE: BANCA -->
-            <section id="pg-banca" class="pg">
-                <div class="pg-title"><i class="fas fa-wallet"></i> GESTÃO DE RISCO</div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-sliders-h"></i><span>CONFIGURAR</span></div>
-                    <div class="banca-form">
-                        <div class="bf-row"><label>Banca ($)</label><input type="number" id="bf-banca" value="100" onchange="calcRisk()"></div>
-                        <div class="bf-row"><label>Risco/operação (%)</label><input type="number" id="bf-risk" value="2" onchange="calcRisk()"></div>
-                        <div class="bf-row"><label>Payout (%)</label><input type="number" id="bf-payout" value="87" onchange="calcRisk()"></div>
-                    </div>
-                </div>
-                <div class="risk-cards">
-                    <div class="rc"><i class="fas fa-hand-holding-usd"></i><span class="rc-l">Entrada</span><span class="rc-v blue" id="rc-entry">$2.00</span></div>
-                    <div class="rc"><i class="fas fa-arrow-down"></i><span class="rc-l">Stop Loss (10%)</span><span class="rc-v red" id="rc-sl">-$10</span></div>
-                    <div class="rc"><i class="fas fa-arrow-up"></i><span class="rc-l">Stop Gain (20%)</span><span class="rc-v green" id="rc-sg">+$20</span></div>
-                    <div class="rc"><i class="fas fa-hashtag"></i><span class="rc-l">Máx ops/dia</span><span class="rc-v blue" id="rc-max">5</span></div>
-                </div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-calculator"></i><span>MARTINGALE</span></div>
-                    <p class="mg-warn">⚠️ Máximo 2 níveis recomendado</p>
-                    <div class="mg-table">
-                        <div class="mg-r mg-h"><span>Nível</span><span>Entrada</span><span>Total</span><span>Lucro</span></div>
-                        <div class="mg-r"><span>1ª</span><span id="mg-e0">--</span><span id="mg-t0">--</span><span id="mg-p0">--</span></div>
-                        <div class="mg-r"><span>2ª MG</span><span id="mg-e1">--</span><span id="mg-t1">--</span><span id="mg-p1">--</span></div>
-                        <div class="mg-r"><span>3ª MG</span><span id="mg-e2">--</span><span id="mg-t2">--</span><span id="mg-p2">--</span></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-chart-pie"></i><span>PROGRESSO DIÁRIO</span></div>
-                    <div class="prog-wrap">
-                        <div class="prog-ring-wrap">
-                            <svg class="prog-ring" viewBox="0 0 120 120"><circle class="prog-bg" cx="60" cy="60" r="54"/><circle class="prog-fill" cx="60" cy="60" r="54" id="prog-circle"/></svg>
-                            <div class="prog-txt"><span class="prog-pct" id="prog-pct">0%</span><span class="prog-sub">da meta</span></div>
-                        </div>
-                        <div class="prog-info">
-                            <div class="pi"><span>Meta</span><span class="green" id="pi-meta">+$20</span></div>
-                            <div class="pi"><span>Lucro</span><span id="pi-lucro">$0</span></div>
-                            <div class="pi"><span>Operações</span><span id="pi-ops">0/5</span></div>
+                        <!-- Countdown -->
+                        <div class="sig-cd">
+                            <span class="scd-label">Expira em</span>
+                            <span class="scd-val" id="scd-val">5:00</span>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- PAGE: SETTINGS -->
-            <section id="pg-settings" class="pg">
-                <div class="pg-title"><i class="fas fa-cog"></i> CONFIGURAÇÕES</div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-user"></i><span>PERFIL</span></div>
-                    <div class="set-group">
-                        <div class="set-i"><span>Nome</span><span id="set-name">--</span></div>
-                        <div class="set-i"><span>Email</span><span id="set-email">--</span></div>
-                        <div class="set-i"><span>Plano</span><span class="gold" id="set-plan">--</span></div>
-                        <div class="set-i"><span>Membro desde</span><span id="set-since">--</span></div>
+            <!-- Indicators (simplified) -->
+            <div class="indicators">
+                <div class="ind-title"><i class="fas fa-chart-bar"></i> ANÁLISE TÉCNICA</div>
+                <div class="ind-row">
+                    <div class="ind-card">
+                        <span class="ic-name">RSI</span>
+                        <div class="ic-bar"><div class="ic-fill" id="ic-rsi"></div></div>
+                        <span class="ic-val" id="iv-rsi">--</span>
+                    </div>
+                    <div class="ind-card">
+                        <span class="ic-name">MACD</span>
+                        <span class="ic-val" id="iv-macd">--</span>
+                    </div>
+                    <div class="ind-card">
+                        <span class="ic-name">TENDÊNCIA</span>
+                        <span class="ic-val" id="iv-trend">--</span>
+                    </div>
+                    <div class="ind-card">
+                        <span class="ic-name">🧠 IA</span>
+                        <span class="ic-val" id="iv-ai">--</span>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-brain"></i><span>CONFIGURAÇÕES DA IA</span></div>
-                    <div class="set-group">
-                        <div class="set-i tog"><span>Alertas sonoros</span><label class="sw"><input type="checkbox" id="set-sound" checked onchange="savePref('sound',this.checked)"><span class="sw-s"></span></label></div>
-                        <div class="set-i tog"><span>Filtro de notícias</span><label class="sw"><input type="checkbox" id="set-news" checked onchange="savePref('newsFilter',this.checked)"><span class="sw-s"></span></label></div>
-                        <div class="set-i tog"><span>Apenas sinais ULTRA</span><label class="sw"><input type="checkbox" id="set-ultra" onchange="savePref('ultraOnly',this.checked)"><span class="sw-s"></span></label></div>
-                        <div class="set-i tog"><span>IA Adaptativa</span><label class="sw"><input type="checkbox" id="set-ai" checked onchange="savePref('aiEnabled',this.checked)"><span class="sw-s"></span></label></div>
-                        <div class="set-i"><span>Confluência mínima</span><select id="set-conf" onchange="savePref('minConf',this.value)"><option value="4">4 (Agressivo)</option><option value="5" selected>5 (Normal)</option><option value="6">6 (Conservador)</option><option value="7">7 (Ultra)</option></select></div>
-                        <div class="set-i"><span>Regime preferido</span><select id="set-regime" onchange="savePref('regime',this.value)"><option value="all" selected>Todos</option><option value="trend">Só Tendência</option><option value="reversal">Só Reversão</option></select></div>
-                    </div>
+            </div>
+
+            <!-- Motivational -->
+            <div class="motivation">
+                <div class="mot-icon">🦈</div>
+                <p class="mot-txt">"O tubarão não caça toda hora. Ele espera o momento certo — e quando ataca, não erra."</p>
+            </div>
+
+            <!-- History -->
+            <div class="history-section">
+                <div class="hs-title"><i class="fas fa-history"></i> ÚLTIMOS SINAIS</div>
+                <div id="hist-list" class="hist-list">
+                    <div class="hist-empty"><p>Os sinais aparecerão aqui</p></div>
                 </div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-coins"></i><span>ATIVOS</span></div>
-                    <div class="assets-g">
-                        <label class="ast"><input type="checkbox" checked value="EUR/USD"> EUR/USD</label>
-                        <label class="ast"><input type="checkbox" checked value="USD/JPY"> USD/JPY</label>
-                        <label class="ast"><input type="checkbox" checked value="GBP/USD"> GBP/USD</label>
-                        <label class="ast"><input type="checkbox" checked value="EUR/GBP"> EUR/GBP</label>
-                        <label class="ast"><input type="checkbox" value="AUD/USD"> AUD/USD</label>
-                        <label class="ast"><input type="checkbox" value="USD/CHF"> USD/CHF</label>
-                        <label class="ast"><input type="checkbox" checked value="BTC/USD"> BTC/USD</label>
-                        <label class="ast"><input type="checkbox" value="ETH/USD"> ETH/USD</label>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-info-circle"></i><span>SOBRE</span></div>
-                    <div class="about">
-                        <div class="about-icon">🦈</div>
-                        <h3>Bot Tubarão V3</h3>
-                        <p>IA Trading System</p>
-                        <p class="about-ver">v3.0.0 Ultimate + TensorFlow.js</p>
-                        <a href="https://wa.me/258849641731" target="_blank" class="about-wa"><i class="fab fa-whatsapp"></i> Suporte</a>
-                    </div>
-                </div>
-            </section>
+            </div>
         </main>
-
-        <!-- Bottom Nav -->
-        <nav class="bnav">
-            <button class="bn active" onclick="goPage('dashboard',this)"><i class="fas fa-chart-line"></i><span>Sinais</span></button>
-            <button class="bn" onclick="goPage('history',this)"><i class="fas fa-history"></i><span>Histórico</span></button>
-            <button class="bn" onclick="goPage('calendar',this)"><i class="fas fa-calendar"></i><span>Notícias</span></button>
-            <button class="bn" onclick="goPage('banca',this)"><i class="fas fa-wallet"></i><span>Banca</span></button>
-            <button class="bn" onclick="goPage('settings',this)"><i class="fas fa-cog"></i><span>Config</span></button>
-        </nav>
     </div>
 
-    <audio id="snd-alert" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg"></audio>
+    <audio id="snd" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg"></audio>
 
-    <!-- ============ JAVASCRIPT ============ -->
     <script type="module">
     import{initializeApp}from"https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
     import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
-    import{getFirestore,doc,setDoc,getDoc,updateDoc,collection,addDoc,query,orderBy,limit,getDocs,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+    import{getFirestore,doc,setDoc,getDoc}from"https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
-    const FB={apiKey:"AIzaSyDu_jqU7wO09scNVf6NrWBEnC_eli-ZKgI",authDomain:"bot-tubarao-v3.firebaseapp.com",projectId:"bot-tubarao-v3",storageBucket:"bot-tubarao-v3.firebasestorage.app",messagingSenderId:"977016143412",appId:"1:977016143412:web:50d97387b51899cc4ed461"};
-    const fbApp=initializeApp(FB);const auth=getAuth(fbApp);const db=getFirestore(fbApp);
+    const fbApp=initializeApp({apiKey:"AIzaSyDu_jqU7wO09scNVf6NrWBEnC_eli-ZKgI",authDomain:"bot-tubarao-v3.firebaseapp.com",projectId:"bot-tubarao-v3",storageBucket:"bot-tubarao-v3.firebasestorage.app",messagingSenderId:"977016143412",appId:"1:977016143412:web:50d97387b51899cc4ed461"});
+    const auth=getAuth(fbApp),db=getFirestore(fbApp);
     let U=null,UD=null;
-    const KEYS={"TUBARAO2025":"Pro","SHARKV3PRO":"Pro","TUBARAOELITE":"Elite","SHARKULTRA":"Elite","TRADER2025":"Básico","DEMO123":"Demo"};
+    const K={"TUBARAO2025":"Pro","SHARKV3PRO":"Pro","TUBARAOELITE":"Elite","SHARKULTRA":"Elite","DEMO123":"Demo"};
 
-    // ============ AUTH ============
-    window.switchTab=function(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('.lt-btn').forEach((b,i)=>b.classList.toggle('active',t==='login'?i===0:i===1));hideMsg();}
+    window.swTab=function(t){document.querySelectorAll('.tabc').forEach(e=>e.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('.lgt').forEach((b,i)=>b.classList.toggle('active',t==='login'?i===0:i===1));hMsg();}
     window.doRegister=async function(){
         const n=document.getElementById('r-name').value.trim(),e=document.getElementById('r-email').value.trim(),p=document.getElementById('r-pass').value,k=document.getElementById('r-key').value.trim().toUpperCase();
-        if(!n||!e||!p||!k){showErr("Preencha tudo!");return;}if(p.length<6){showErr("Senha mín. 6 caracteres");return;}if(!KEYS[k]){showErr("Chave inválida!");return;}
-        try{showOk("Criando...");const c=await createUserWithEmailAndPassword(auth,e,p);await setDoc(doc(db,"users",c.user.uid),{name:n,email:e,license:k,plan:KEYS[k],createdAt:new Date().toISOString(),settings:{sound:true,newsFilter:true,ultraOnly:false,aiEnabled:true,minConf:5,regime:'all'},stats:{wins:0,losses:0,totalProfit:0,streak:0,bestStreak:0},banca:{value:100,risk:2,payout:87}});showOk("Conta criada!");}catch(err){showErr(errMsg(err.code));}
+        if(!n||!e||!p||!k){sErr("Preencha todos os campos");return;}if(p.length<6){sErr("Senha mínimo 6 caracteres");return;}if(!K[k]){sErr("Código de ativação inválido");return;}
+        try{sOk("Ativando...");const c=await createUserWithEmailAndPassword(auth,e,p);await setDoc(doc(db,"users",c.user.uid),{name:n,email:e,plan:K[k],createdAt:new Date().toISOString()});sOk("Conta ativada com sucesso!");}catch(err){sErr(eMsg(err.code));}
     }
     window.doLogin=async function(){
         const e=document.getElementById('l-email').value.trim(),p=document.getElementById('l-pass').value;
-        if(!e||!p){showErr("Preencha email e senha!");return;}
-        try{showOk("Entrando...");await signInWithEmailAndPassword(auth,e,p);}catch(err){showErr(errMsg(err.code));}
+        if(!e||!p){sErr("Preencha email e senha");return;}
+        try{sOk("Entrando...");await signInWithEmailAndPassword(auth,e,p);}catch(err){sErr(eMsg(err.code));}
     }
-    window.doLogout=async function(){if(confirm("Sair do sistema?")){await signOut(auth);document.getElementById('screen-app').classList.remove('active');document.getElementById('screen-login').classList.add('active');}}
-    onAuthStateChanged(auth,async u=>{document.getElementById('splash').classList.remove('active');if(u){U=u;const s=await getDoc(doc(db,"users",u.uid));if(s.exists()){UD=s.data();boot();}}else{document.getElementById('screen-login').classList.add('active');}});
+    window.doLogout=async function(){if(confirm("Sair?")){await signOut(auth);show('scr-login');hide('scr-app');}}
+    onAuthStateChanged(auth,async u=>{document.getElementById('splash').classList.remove('active');if(u){U=u;const s=await getDoc(doc(db,"users",u.uid));if(s.exists()){UD=s.data();boot();}}else{show('scr-login');}});
+    function sErr(m){const e=document.getElementById('auth-err');e.textContent=m;e.style.display=m?'block':'none';document.getElementById('auth-ok').style.display='none';}
+    function sOk(m){const e=document.getElementById('auth-ok');e.textContent=m;e.style.display=m?'block':'none';}
+    function hMsg(){sErr('');document.getElementById('auth-ok').style.display='none';}
+    function eMsg(c){return{'auth/email-already-in-use':'Email já existe','auth/weak-password':'Senha fraca','auth/invalid-email':'Email inválido','auth/user-not-found':'Conta não encontrada','auth/wrong-password':'Senha incorreta','auth/invalid-credential':'Dados incorretos','auth/too-many-requests':'Aguarde um momento'}[c]||c;}
+    function show(id){document.getElementById(id).classList.add('active');}
+    function hide(id){document.getElementById(id).classList.remove('active');}
 
-    function showErr(m){const e=document.getElementById('auth-error');e.textContent=m;e.style.display=m?'block':'none';document.getElementById('auth-success').style.display='none';}
-    function showOk(m){const e=document.getElementById('auth-success');e.textContent=m;e.style.display=m?'block':'none';}
-    function hideMsg(){showErr('');document.getElementById('auth-success').style.display='none';}
-    function errMsg(c){return{'auth/email-already-in-use':'Email já cadastrado','auth/weak-password':'Senha fraca','auth/invalid-email':'Email inválido','auth/user-not-found':'Não encontrado','auth/wrong-password':'Senha incorreta','auth/invalid-credential':'Credenciais inválidas','auth/too-many-requests':'Aguarde...'}[c]||c;}
-
-    // ============ BOOT ============
+    // ====== BOOT ======
     function boot(){
-        document.getElementById('screen-login').classList.remove('active');
-        document.getElementById('screen-app').classList.add('active');
-        document.getElementById('w-name').textContent=UD.name.split(' ')[0];
-        document.getElementById('w-plan').textContent=UD.plan;
-        document.getElementById('set-name').textContent=UD.name;
-        document.getElementById('set-email').textContent=UD.email;
-        document.getElementById('set-plan').textContent=UD.plan;
-        document.getElementById('set-since').textContent=new Date(UD.createdAt).toLocaleDateString('pt-BR');
-        if(UD.banca){document.getElementById('bf-banca').value=UD.banca.value||100;document.getElementById('bf-risk').value=UD.banca.risk||2;document.getElementById('bf-payout').value=UD.banca.payout||87;}
-        if(UD.stats)updateStats(UD.stats);
-        if(UD.settings){document.getElementById('set-sound').checked=UD.settings.sound!==false;document.getElementById('set-news').checked=UD.settings.newsFilter!==false;document.getElementById('set-ultra').checked=UD.settings.ultraOnly===true;document.getElementById('set-ai').checked=UD.settings.aiEnabled!==false;document.getElementById('set-conf').value=UD.settings.minConf||5;document.getElementById('set-regime').value=UD.settings.regime||'all';}
-        calcRisk();startClock();initAI();loadNews();loadHist();
+        hide('scr-login');show('scr-app');
+        document.getElementById('hero-name').textContent=UD.name.split(' ')[0];
+        startClock();initMarkets();initAI();
     }
 
-    // ============ CLOCK ============
+    // ====== CLOCK ======
     function startClock(){tick();setInterval(tick,1000);}
     function tick(){
-        const n=new Date();document.getElementById('mkt-time').textContent=n.toLocaleTimeString('pt-BR');
-        document.getElementById('w-date').textContent=n.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
+        const n=new Date();
+        document.getElementById('hero-date').textContent=n.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
         const h=n.getUTCHours(),d=n.getUTCDay(),we=d===0||d===6;
-        document.getElementById('mkt-dot').className='mkt-dot '+(we?'off':'on');
-        document.getElementById('mkt-state').textContent=we?'FECHADO':'ABERTO';
-        const ss=[];if(h>=7&&h<16)ss.push('Londres');if(h>=13&&h<21)ss.push('NY');if(h>=0&&h<9)ss.push('Tóquio');
-        document.getElementById('mkt-session').textContent=ss.join('+')||'--';
-        sestatus('sess-ldn',h>=7&&h<16);sestatus('sess-ny',h>=13&&h<21);sestatus('sess-tky',h>=0&&h<9);sestatus('sess-ovl',h>=13&&h<16);
+        document.getElementById('hero-mkt').textContent=we?'MERCADO FECHADO':'MERCADO ABERTO';
+        document.querySelector('.dot-live').className='dot-live'+(we?' off':'');
     }
-    function sestatus(id,a){const e=document.getElementById(id);e.textContent=a?'🟢 ATIVA':'⚪ Fechada';e.className='sess-st'+(a?' on':'');}
 
-    // ============ MARKET SIMULATOR ============
-    class MarketSim{
-        constructor(pair,startPrice){
-            this.pair=pair;this.price=startPrice;this.prices=[];this.volumes=[];
-            this.trend=0;this.volatility=0.0003;this.momentum=0;
-            for(let i=0;i<200;i++)this.step();
-        }
-        step(){
-            // Regime changes
+    // ====== MARKET SIM ======
+    const PAIRS={
+        'EUR/USD':{price:1.0852,pip:0.0001,flag:'🇪🇺🇺🇸'},
+        'USD/JPY':{price:149.52,pip:0.01,flag:'🇺🇸🇯🇵'},
+        'GBP/USD':{price:1.2653,pip:0.0001,flag:'🇬🇧🇺🇸'},
+        'EUR/GBP':{price:0.8578,pip:0.0001,flag:'🇪🇺🇬🇧'},
+        'AUD/USD':{price:0.6545,pip:0.0001,flag:'🇦🇺🇺🇸'},
+        'BTC/USD':{price:67520,pip:0.01,flag:'₿💲'}
+    };
+    let sims={},activePair='EUR/USD',history=[],cdTimer=null,muted=false,aiModel=null;
+
+    class Sim{
+        constructor(p){this.p=p;this.prices=[];this.trend=0;this.vol=0.0003;this.mom=0;for(let i=0;i<200;i++)this.next();}
+        next(){
             if(Math.random()<0.02)this.trend=(Math.random()-0.5)*0.001;
-            if(Math.random()<0.05)this.volatility=0.0001+Math.random()*0.0008;
-            // Price movement (geometric brownian motion)
-            const drift=this.trend;
-            const shock=this.volatility*(Math.random()*2-1);
-            const momentum=this.momentum*0.9;
-            this.momentum=shock;
-            this.price*=(1+drift+shock+momentum*0.1);
-            this.price=Math.max(this.price*0.95,Math.min(this.price*1.05,this.price));
-            const vol=Math.floor(1000+Math.random()*5000*(1+Math.abs(shock)*100));
-            this.prices.push(this.price);
-            this.volumes.push(vol);
-            if(this.prices.length>200){this.prices.shift();this.volumes.shift();}
+            if(Math.random()<0.05)this.vol=0.0001+Math.random()*0.0008;
+            const d=this.trend,s=this.vol*(Math.random()*2-1);
+            this.mom=s;this.p*=(1+d+s+this.mom*0.08);
+            this.prices.push(this.p);if(this.prices.length>200)this.prices.shift();
         }
-        getOHLCV(periods){
-            const r=[];const p=this.prices;const v=this.volumes;
-            for(let i=Math.max(0,p.length-periods);i<p.length;i++){
-                const o=p[i]*(1+(Math.random()-0.5)*0.0002);
-                const c=p[i];const h=Math.max(o,c)*(1+Math.random()*0.0003);
-                const l=Math.min(o,c)*(1-Math.random()*0.0003);
-                r.push({o,h,l,c,v:v[i],t:i});
+        ohlc(n){
+            const r=[];for(let i=Math.max(0,this.prices.length-n);i<this.prices.length;i++){
+                const c=this.prices[i],o=c*(1+(Math.random()-0.5)*0.0002);
+                r.push({o,h:Math.max(o,c)*(1+Math.random()*0.0003),l:Math.min(o,c)*(1-Math.random()*0.0003),c,v:1000+Math.random()*5000});
             }return r;
         }
     }
 
-    // ============ TECHNICAL ANALYSIS ENGINE ============
-    class TechAnalysis{
-        static sma(data,period){
-            if(data.length<period)return null;
-            const slice=data.slice(-period);
-            return slice.reduce((a,b)=>a+b,0)/period;
-        }
-        static ema(data,period){
-            if(data.length<period)return null;
-            const k=2/(period+1);let ema=data.slice(0,period).reduce((a,b)=>a+b,0)/period;
-            for(let i=period;i<data.length;i++)ema=data[i]*k+ema*(1-k);
-            return ema;
-        }
-        static rsi(closes,period=14){
-            if(closes.length<period+1)return 50;
-            let gains=0,losses=0;
-            for(let i=closes.length-period;i<closes.length;i++){
-                const d=closes[i]-closes[i-1];
-                if(d>0)gains+=d;else losses+=Math.abs(d);
-            }
-            gains/=period;losses/=period;
-            if(losses===0)return 100;
-            return 100-100/(1+gains/losses);
-        }
-        static macd(closes,fast=12,slow=26,signal=9){
-            const emaF=this.ema(closes,fast);const emaS=this.ema(closes,slow);
-            if(!emaF||!emaS)return{line:0,signal:0,hist:0};
-            const line=emaF-emaS;
-            const hist=line*0.3;// simplified
-            return{line,signal:line-hist,hist};
-        }
-        static bollinger(closes,period=20,dev=2){
-            if(closes.length<period)return{upper:0,mid:0,lower:0,width:0,pct:0.5};
-            const slice=closes.slice(-period);
-            const mid=slice.reduce((a,b)=>a+b,0)/period;
-            const std=Math.sqrt(slice.reduce((a,b)=>a+Math.pow(b-mid,2),0)/period);
-            const upper=mid+std*dev;const lower=mid-std*dev;
-            const width=(upper-lower)/mid;
-            const pct=(closes[closes.length-1]-lower)/(upper-lower);
-            return{upper,mid,lower,width,pct:Math.max(0,Math.min(1,pct))};
-        }
-        static adx(highs,lows,closes,period=14){
-            if(closes.length<period*2)return 25;
-            let sumDX=0;
-            for(let i=closes.length-period;i<closes.length;i++){
-                const tr=Math.max(highs[i]-lows[i],Math.abs(highs[i]-closes[i-1]),Math.abs(lows[i]-closes[i-1]));
-                const dmP=highs[i]-highs[i-1]>lows[i-1]-lows[i]?Math.max(highs[i]-highs[i-1],0):0;
-                const dmN=lows[i-1]-lows[i]>highs[i]-highs[i-1]?Math.max(lows[i-1]-lows[i],0):0;
-                const diP=tr>0?dmP/tr*100:0;const diN=tr>0?dmN/tr*100:0;
-                const dx=diP+diN>0?Math.abs(diP-diN)/(diP+diN)*100:0;
-                sumDX+=dx;
-            }
-            return sumDX/period;
-        }
-        static atr(highs,lows,closes,period=14){
-            if(closes.length<period+1)return 0;
-            let sum=0;
-            for(let i=closes.length-period;i<closes.length;i++){
-                const tr=Math.max(highs[i]-lows[i],Math.abs(highs[i]-closes[i-1]),Math.abs(lows[i]-closes[i-1]));
-                sum+=tr;
-            }
-            return sum/period;
-        }
-        static stochRSI(closes,period=14,kPeriod=3){
-            const rsiVals=[];
-            for(let i=period+1;i<=closes.length;i++){
-                rsiVals.push(this.rsi(closes.slice(0,i),period));
-            }
-            if(rsiVals.length<period)return{k:50,d:50};
-            const slice=rsiVals.slice(-period);
-            const min=Math.min(...slice);const max=Math.max(...slice);
-            const k=max-min>0?(rsiVals[rsiVals.length-1]-min)/(max-min)*100:50;
-            const d=this.sma(rsiVals.slice(-kPeriod),kPeriod)||50;
-            return{k,d};
-        }
-        static detectRegime(adx,atr,bbWidth,closes){
-            const last=closes.slice(-5);
-            const trend=Math.abs(last[last.length-1]-last[0])/last[0]*100;
-            if(adx>40&&trend>0.1)return{type:'TENDÊNCIA FORTE',icon:'🔥',color:'green'};
-            if(adx>25&&trend>0.05)return{type:'TENDÊNCIA',icon:'📈',color:'blue'};
-            if(bbWidth<0.005)return{type:'SQUEEZE',icon:'🔄',color:'orange'};
-            if(adx<20)return{type:'LATERAL',icon:'➡️',color:'neutral'};
-            if(atr>0.002)return{type:'ALTA VOLATILIDADE',icon:'⚡',color:'red'};
-            return{type:'NORMAL',icon:'📊',color:'blue'};
-        }
-        static pivotPoints(h,l,c){
-            const pv=(h+l+c)/3;
-            return{pv,r1:2*pv-l,r2:pv+(h-l),r3:h+2*(pv-l),s1:2*pv-h,s2:pv-(h-l),s3:l-2*(h-pv)};
-        }
-        static detectCandle(o,h,l,c){
-            const body=Math.abs(c-o);const range=h-l;if(range===0)return'none';
-            const upperShadow=h-Math.max(o,c);const lowerShadow=Math.min(o,c)-l;
-            const bodyRatio=body/range;
-            if(bodyRatio<0.1)return'doji';
-            if(lowerShadow>body*2&&upperShadow<body*0.5&&c>o)return'hammer';
-            if(upperShadow>body*2&&lowerShadow<body*0.5&&c<o)return'shooting_star';
-            if(bodyRatio>0.7&&c>o)return'strong_bull';
-            if(bodyRatio>0.7&&c<o)return'strong_bear';
-            return c>o?'bull':'bear';
-        }
+    function initMarkets(){
+        Object.keys(PAIRS).forEach(k=>sims[k]=new Sim(PAIRS[k].price));
+        setInterval(()=>{
+            Object.keys(PAIRS).forEach(k=>{
+                sims[k].next();
+                const el=document.getElementById('price-'+k);
+                if(el){
+                    const p=sims[k].p;const d=PAIRS[k].pip<0.001?5:2;
+                    el.textContent=p.toFixed(d);
+                }
+            });
+        },2000);
+        setInterval(drawChart,3000);drawChart();
+        analyze();setInterval(analyze,45000);
     }
 
-    // ============ AI ENGINE (TensorFlow.js) ============
-    let aiModel=null;
+    window.selectAsset=function(btn){
+        document.querySelectorAll('.as-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        activePair=btn.dataset.pair;
+        document.getElementById('chart-pair').textContent=activePair;
+        drawChart();
+    }
+
+    // ====== TECHNICAL ANALYSIS ======
+    function sma(d,p){if(d.length<p)return null;return d.slice(-p).reduce((a,b)=>a+b,0)/p;}
+    function ema(d,p){if(d.length<p)return null;const k=2/(p+1);let e=d.slice(0,p).reduce((a,b)=>a+b,0)/p;for(let i=p;i<d.length;i++)e=d[i]*k+e*(1-k);return e;}
+    function rsi(c,p=14){if(c.length<p+1)return 50;let g=0,l=0;for(let i=c.length-p;i<c.length;i++){const d=c[i]-c[i-1];if(d>0)g+=d;else l+=Math.abs(d);}g/=p;l/=p;return l===0?100:100-100/(1+g/l);}
+    function bbPct(c,p=20){if(c.length<p)return 0.5;const s=c.slice(-p),m=s.reduce((a,b)=>a+b,0)/p,std=Math.sqrt(s.reduce((a,b)=>a+Math.pow(b-m,2),0)/p);const u=m+std*2,lo=m-std*2;return Math.max(0,Math.min(1,(c[c.length-1]-lo)/(u-lo||1)));}
+    function adx(h,l,c,p=14){if(c.length<p*2)return 25;let s=0;for(let i=c.length-p;i<c.length;i++){const tr=Math.max(h[i]-l[i],Math.abs(h[i]-c[i-1]),Math.abs(l[i]-c[i-1]));const dp=Math.max(h[i]-h[i-1],0),dn=Math.max(l[i-1]-l[i],0);const dip=tr>0?dp/tr*100:0,din=tr>0?dn/tr*100:0;s+=dip+din>0?Math.abs(dip-din)/(dip+din)*100:0;}return s/p;}
+
+    // ====== AI ======
     async function initAI(){
-        const st=document.getElementById('ai-state');const ind=document.getElementById('ai-indicator');
-        st.textContent='Carregando TensorFlow.js...';ind.className='ai-indicator loading';
+        const st=document.getElementById('ai-state'),dot=document.getElementById('ai-dot');
+        st.textContent='Carregando rede neural...';dot.className='ai-s-dot loading';
         try{
-            // Create neural network
             aiModel=tf.sequential();
-            aiModel.add(tf.layers.dense({inputShape:[20],units:64,activation:'relu'}));
-            aiModel.add(tf.layers.dropout({rate:0.2}));
-            aiModel.add(tf.layers.dense({units:32,activation:'relu'}));
-            aiModel.add(tf.layers.dropout({rate:0.1}));
-            aiModel.add(tf.layers.dense({units:16,activation:'relu'}));
-            aiModel.add(tf.layers.dense({units:3,activation:'softmax'}));// [down, neutral, up]
-            aiModel.compile({optimizer:'adam',loss:'categoricalCrossentropy',metrics:['accuracy']});
-            // Quick training with synthetic data
-            await trainAI();
-            st.textContent='IA Ativa — TensorFlow.js carregado';ind.className='ai-indicator on';
-            startEngine();
-        }catch(e){
-            st.textContent='IA em modo simplificado';ind.className='ai-indicator warn';
-            startEngine();
-        }
-    }
-    async function trainAI(){
-        const xs=[];const ys=[];
-        for(let i=0;i<500;i++){
-            const features=[];
-            const rsi=Math.random()*100;const stoch=Math.random()*100;
-            const macd=(Math.random()-0.5)*0.002;const adx=Math.random()*60;
-            const bbPct=Math.random();const vol=Math.random()*3;
-            const trend=(Math.random()-0.5)*2;const momentum=(Math.random()-0.5)*2;
-            const atr=Math.random()*0.005;const regime=Math.random();
-            features.push(rsi/100,stoch/100,macd*500+0.5,adx/60,bbPct,vol/3,
-                (trend+2)/4,(momentum+2)/4,atr*200,regime,
-                Math.random(),Math.random(),Math.random(),Math.random(),Math.random(),
-                Math.random(),Math.random(),Math.random(),Math.random(),Math.random());
-            xs.push(features);
-            // Label based on features
-            let label;
-            if(rsi<30&&stoch<30&&trend>0)label=[0,0,1];// UP
-            else if(rsi>70&&stoch>70&&trend<0)label=[1,0,0];// DOWN
-            else if(rsi<25&&bbPct<0.2)label=[0,0.1,0.9];// likely UP
-            else if(rsi>75&&bbPct>0.8)label=[0.9,0.1,0];// likely DOWN
-            else label=[0.2,0.6,0.2];// neutral
-            ys.push(label);
-        }
-        const xT=tf.tensor2d(xs);const yT=tf.tensor2d(ys);
-        await aiModel.fit(xT,yT,{epochs:20,batchSize:32,shuffle:true,verbose:0});
-        xT.dispose();yT.dispose();
-    }
-    function aiPredict(features){
-        if(!aiModel)return{direction:'neutral',confidence:50};
-        const input=tf.tensor2d([features]);
-        const pred=aiModel.predict(input);
-        const vals=pred.dataSync();
-        input.dispose();pred.dispose();
-        const down=vals[0],neutral=vals[1],up=vals[2];
-        if(up>down&&up>neutral&&up>0.4)return{direction:'CALL',confidence:Math.round(up*100)};
-        if(down>up&&down>neutral&&down>0.4)return{direction:'PUT',confidence:Math.round(down*100)};
-        return{direction:'neutral',confidence:Math.round(neutral*100)};
+            aiModel.add(tf.layers.dense({inputShape:[15],units:48,activation:'relu'}));
+            aiModel.add(tf.layers.dropout({rate:0.15}));
+            aiModel.add(tf.layers.dense({units:24,activation:'relu'}));
+            aiModel.add(tf.layers.dense({units:3,activation:'softmax'}));
+            aiModel.compile({optimizer:'adam',loss:'categoricalCrossentropy'});
+            const xs=[],ys=[];
+            for(let i=0;i<400;i++){
+                const f=Array.from({length:15},()=>Math.random());
+                xs.push(f);
+                const r=f[0],s=f[1],bb=f[4];
+                if(r<0.3&&s<0.3&&bb<0.3)ys.push([0,0,1]);
+                else if(r>0.7&&s>0.7&&bb>0.7)ys.push([1,0,0]);
+                else ys.push([0.2,0.6,0.2]);
+            }
+            await aiModel.fit(tf.tensor2d(xs),tf.tensor2d(ys),{epochs:15,batchSize:32,verbose:0});
+            st.textContent='IA Ativa — Pronta para operar';dot.className='ai-s-dot on';
+        }catch(e){st.textContent='IA em modo simplificado';dot.className='ai-s-dot warn';}
     }
 
-    // ============ MAIN ENGINE ============
-    const MARKETS=[
-        {pair:'EUR/USD',price:1.0850,pip:0.0001},
-        {pair:'USD/JPY',price:149.50,pip:0.01},
-        {pair:'GBP/USD',price:1.2650,pip:0.0001},
-        {pair:'EUR/GBP',price:0.8580,pip:0.0001},
-        {pair:'BTC/USD',price:67500,pip:0.01},
-    ];
-    let sims={};let history=[];let stats={wins:0,losses:0,profit:0,streak:0,bestStreak:0};
-    let cdInterval=null;let muted=false;let newsBlock=false;
-
-    function startEngine(){
-        MARKETS.forEach(m=>{sims[m.pair]=new MarketSim(m.pair,m.price);});
-        setInterval(()=>MARKETS.forEach(m=>sims[m.pair].step()),2000);
-        analyze();setInterval(analyze,40000);
-        updateSentiment();setInterval(updateSentiment,25000);
-        drawChart();setInterval(drawChart,3000);
+    function aiPredict(feat){
+        if(!aiModel)return{dir:'neutral',conf:50};
+        const t=tf.tensor2d([feat]),p=aiModel.predict(t),v=p.dataSync();t.dispose();p.dispose();
+        if(v[2]>v[0]&&v[2]>0.4)return{dir:'CALL',conf:Math.round(v[2]*100)};
+        if(v[0]>v[2]&&v[0]>0.4)return{dir:'PUT',conf:Math.round(v[0]*100)};
+        return{dir:'neutral',conf:Math.round(v[1]*100)};
     }
 
+    // ====== ANALYZE ======
     function analyze(){
-        const cfg=UD?.settings||{};const minConf=parseInt(cfg.minConf)||5;const ultraOnly=cfg.ultraOnly||false;
-        const aiOn=cfg.aiEnabled!==false;const regimePref=cfg.regime||'all';
-        if(newsBlock&&cfg.newsFilter!==false)return;
-        const selected=[];
-        document.querySelectorAll('.ast input:checked').forEach(cb=>{const m=MARKETS.find(x=>x.pair===cb.value);if(m)selected.push(m);});
-        if(!selected.length)return;
-        let bestSignal=null;let bestScore=-1;
-        selected.forEach(market=>{
-            const sim=sims[market.pair];if(!sim)return;
-            const ohlcv=sim.getOHLCV(100);if(ohlcv.length<50)return;
-            const closes=ohlcv.map(x=>x.c);const highs=ohlcv.map(x=>x.h);
-            const lows=ohlcv.map(x=>x.l);const vols=ohlcv.map(x=>x.v);
-            // Calculate indicators
-            const rsi=TechAnalysis.rsi(closes,14);
-            const stoch=TechAnalysis.stochRSI(closes,14,3);
-            const macd=TechAnalysis.macd(closes,12,26,9);
-            const bb=TechAnalysis.bollinger(closes,20,2);
-            const adx=TechAnalysis.adx(highs,lows,closes,14);
-            const atr=TechAnalysis.atr(highs,lows,closes,14);
-            const smaFast=TechAnalysis.sma(closes,9);
-            const smaSlow=TechAnalysis.sma(closes,21);
-            const smaTrend=TechAnalysis.sma(closes,50);
-            const regime=TechAnalysis.detectRegime(adx,atr,bb.width,closes);
-            const lastCandle=ohlcv[ohlcv.length-1];
-            const candleType=TechAnalysis.detectCandle(lastCandle.o,lastCandle.h,lastCandle.l,lastCandle.c);
-            const avgVol=TechAnalysis.sma(vols,20);
-            const volRatio=avgVol?vols[vols.length-1]/avgVol:1;
-            const price=closes[closes.length-1];
-            // Regime filter
-            if(regimePref==='trend'&&regime.type==='LATERAL')return;
-            if(regimePref==='reversal'&&regime.type.includes('TENDÊNCIA'))return;
-            // AI Prediction
-            let aiResult={direction:'neutral',confidence:50};
-            if(aiOn){
-                const features=[rsi/100,stoch.k/100,(macd.hist*500+0.5),adx/60,bb.pct,volRatio/3,
-                    smaFast&&smaSlow?(smaFast>smaSlow?0.8:0.2):0.5,
-                    smaSlow&&smaTrend?(smaSlow>smaTrend?0.8:0.2):0.5,
-                    atr*200,regime.type.includes('TENDÊNCIA')?0.8:0.3,
-                    candleType==='strong_bull'?0.9:candleType==='strong_bear'?0.1:0.5,
-                    candleType==='hammer'?0.8:candleType==='shooting_star'?0.2:0.5,
-                    bb.width*100,price>bb.mid?0.7:0.3,
-                    macd.line>0?0.7:0.3,macd.hist>0?0.7:0.3,
-                    stoch.k>stoch.d?0.7:0.3,volRatio>1.2?0.8:0.4,
-                    adx>30?0.8:0.3,Math.random()*0.2+0.4];
-                aiResult=aiPredict(features);
-            }
-            // CONFLUENCE SCORING
-            let callScore=0,putScore=0,callConf=[],putConf=[];
-            // RSI
-            if(rsi<30){callScore+=3;callConf.push('🟢 RSI Sobrevenda ('+rsi.toFixed(0)+')');}
-            else if(rsi<40){callScore+=1;callConf.push('🟢 RSI Baixo ('+rsi.toFixed(0)+')');}
-            if(rsi>70){putScore+=3;putConf.push('🔴 RSI Sobrecompra ('+rsi.toFixed(0)+')');}
-            else if(rsi>60){putScore+=1;putConf.push('🔴 RSI Alto ('+rsi.toFixed(0)+')');}
-            // Stochastic RSI
-            if(stoch.k<20&&stoch.k>stoch.d){callScore+=2;callConf.push('🟢 Stoch RSI Cruzamento ↑');}
-            if(stoch.k>80&&stoch.k<stoch.d){putScore+=2;putConf.push('🔴 Stoch RSI Cruzamento ↓');}
-            // MACD
-            if(macd.hist>0&&macd.line>macd.signal){callScore+=2;callConf.push('🟢 MACD Bullish');}
-            if(macd.hist<0&&macd.line<macd.signal){putScore+=2;putConf.push('🔴 MACD Bearish');}
-            // Bollinger
-            if(bb.pct<0.15){callScore+=2;callConf.push('🟢 Bollinger Inferior');}
-            if(bb.pct>0.85){putScore+=2;putConf.push('🔴 Bollinger Superior');}
-            // Moving Averages
-            if(smaFast&&smaSlow&&smaTrend&&smaFast>smaSlow&&smaSlow>smaTrend){callScore+=2;callConf.push('🟢 MAs Alinhadas ↑');}
-            if(smaFast&&smaSlow&&smaTrend&&smaFast<smaSlow&&smaSlow<smaTrend){putScore+=2;putConf.push('🔴 MAs Alinhadas ↓');}
-            // ADX (trend strength)
-            if(adx>30){const bonus=1;callScore+=smaFast>smaSlow?bonus:0;putScore+=smaFast<smaSlow?bonus:0;
-                if(smaFast>smaSlow)callConf.push('🟢 ADX Forte ('+adx.toFixed(0)+')');
-                if(smaFast<smaSlow)putConf.push('🔴 ADX Forte ('+adx.toFixed(0)+')');}
-            // Volume
-            if(volRatio>1.3){callScore+=1;putScore+=1;callConf.push('🟢 Volume Alto');putConf.push('🔴 Volume Alto');}
-            // Candle patterns
-            if(candleType==='hammer'||candleType==='strong_bull'){callScore+=2;callConf.push('🟢 Vela '+candleType);}
-            if(candleType==='shooting_star'||candleType==='strong_bear'){putScore+=2;putConf.push('🔴 Vela '+candleType);}
-            // Anti-consolidation
-            if(regime.type!=='LATERAL'){callScore+=1;putScore+=1;callConf.push('🟢 Sem Consolidação');putConf.push('🔴 Sem Consolidação');}
-            // AI bonus
-            if(aiOn&&aiResult.direction==='CALL'){callScore+=3;callConf.push('🧠 IA: CALL ('+aiResult.confidence+'%)');}
-            if(aiOn&&aiResult.direction==='PUT'){putScore+=3;putConf.push('🧠 IA: PUT ('+aiResult.confidence+'%)');}
-            // Update indicators display
-            updateIndDisplay(rsi,stoch,macd,adx,atr,bb,regime,aiResult);
-            // Update S&R
-            const sr=TechAnalysis.pivotPoints(Math.max(...highs.slice(-20)),Math.min(...lows.slice(-20)),price);
-            updateSR(sr,market.pip);
-            // Determine signal
-            const maxS=Math.max(callScore,putScore);
-            if(maxS>=minConf&&maxS>bestScore){
-                bestScore=maxS;
-                bestSignal={market,direction:callScore>putScore?'CALL':'PUT',score:maxS,
-                    confluences:callScore>putScore?callConf:putConf,regime,aiResult,rsi,stoch,bb,adx};
-            }
-        });
-        if(bestSignal){
-            if(ultraOnly&&bestSignal.score<(parseInt(cfg.minConf)||5)+3)return;
-            fireSignal(bestSignal);
-        }
+        const sim=sims[activePair];if(!sim)return;
+        const data=sim.ohlc(100);if(data.length<50)return;
+        const closes=data.map(x=>x.c),highs=data.map(x=>x.h),lows=data.map(x=>x.l);
+        const r=rsi(closes),bb=bbPct(closes),ad=adx(highs,lows,closes);
+        const macdVal=ema(closes,12)-ema(closes,26);
+        const f9=sma(closes,9),s21=sma(closes,21);
+        const trendUp=f9&&s21&&f9>s21,trendDn=f9&&s21&&f9<s21;
+        // AI
+        const feat=[r/100,(50+Math.random()*10)/100,(macdVal||0)*500+0.5,ad/60,bb,
+            Math.random()*0.5+0.5,trendUp?0.8:0.2,trendDn?0.8:0.2,
+            Math.random()*0.3,Math.random()*0.3,bb<0.2?0.9:0.3,bb>0.8?0.9:0.3,
+            r<30?0.9:r>70?0.1:0.5,ad>30?0.8:0.3,Math.random()*0.2+0.4];
+        const ai=aiPredict(feat);
+        // Update indicators
+        document.getElementById('iv-rsi').textContent=r.toFixed(0);
+        document.getElementById('ic-rsi').style.width=r+'%';
+        document.getElementById('ic-rsi').className='ic-fill '+(r>70?'ovb':r<30?'ovs':'ok');
+        document.getElementById('iv-macd').textContent=macdVal>0?'📈 Bullish':'📉 Bearish';
+        document.getElementById('iv-macd').className='ic-val '+(macdVal>0?'green':'red');
+        document.getElementById('iv-trend').textContent=trendUp?'📈 ALTA':trendDn?'📉 BAIXA':'➡️ LATERAL';
+        document.getElementById('iv-trend').className='ic-val '+(trendUp?'green':trendDn?'red':'');
+        document.getElementById('iv-ai').textContent=ai.dir!=='neutral'?ai.dir+' '+ai.conf+'%':'Analisando...';
+        document.getElementById('iv-ai').className='ic-val '+(ai.dir==='CALL'?'green':ai.dir==='PUT'?'red':'');
+        // Score
+        let callS=0,putS=0,callC=[],putC=[];
+        if(r<30){callS+=3;callC.push('RSI em zona de sobrevenda');}else if(r<40){callS+=1;callC.push('RSI favorável para compra');}
+        if(r>70){putS+=3;putC.push('RSI em zona de sobrecompra');}else if(r>60){putS+=1;putC.push('RSI favorável para venda');}
+        if(bb<0.2){callS+=2;callC.push('Preço na Bollinger inferior');}
+        if(bb>0.8){putS+=2;putC.push('Preço na Bollinger superior');}
+        if(trendUp){callS+=2;callC.push('Tendência de alta confirmada');}
+        if(trendDn){putS+=2;putC.push('Tendência de baixa confirmada');}
+        if(macdVal>0){callS+=1;callC.push('MACD positivo');}
+        if(macdVal<0){putS+=1;putC.push('MACD negativo');}
+        if(ad>30){if(trendUp){callS+=1;callC.push('Força da tendência alta');}if(trendDn){putS+=1;putC.push('Força da tendência alta');}}
+        if(ai.dir==='CALL'){callS+=3;callC.push('IA prevê alta com '+ai.conf+'%');}
+        if(ai.dir==='PUT'){putS+=3;putC.push('IA prevê baixa com '+ai.conf+'%');}
+        const best=callS>putS?'CALL':'PUT';const score=Math.max(callS,putS);const reasons=callS>putS?callC:putC;
+        if(score>=5)fireSignal(best,score,reasons,ai);
     }
 
-    function fireSignal(s){
-        const now=new Date();const maxPts=20;const pct=Math.min(Math.round((s.score/maxPts)*100),99);
-        const ultra=s.score>=8;const level=s.score>=10?'ULTRA ★★★':s.score>=8?'FORTE ★★':'FORTE ★';
+    function fireSignal(dir,score,reasons,ai){
+        const now=new Date(),pct=Math.min(Math.round((score/18)*100),99);
         const card=document.getElementById('sig-card');
-        card.className='sig-card '+s.direction.toLowerCase()+(ultra?' ultra':'');
+        card.className='sig-card '+dir.toLowerCase()+(score>=8?' ultra':'');
         document.getElementById('sig-wait').classList.add('hide');
-        document.getElementById('sig-live').classList.remove('hide');
-        document.getElementById('sig-badge').textContent=level;
-        document.getElementById('sig-badge').className='sig-badge '+(ultra?'ultra':'forte');
-        document.getElementById('sig-dir-icon').textContent=s.direction==='CALL'?'📈':'📉';
-        document.getElementById('sig-dir-txt').textContent=s.direction;
-        document.getElementById('sig-dir-box').className='sig-dir '+s.direction.toLowerCase();
-        document.getElementById('sg-asset').textContent=s.market.pair;
-        document.getElementById('sg-time').textContent=now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-        document.getElementById('as-val').textContent=pct;
-        document.getElementById('as-fill').style.width=pct+'%';
-        document.getElementById('as-fill').className='as-fill '+(pct>=80?'ultra':pct>=60?'forte':pct>=40?'medio':'fraco');
-        document.getElementById('regime-val').textContent=s.regime.icon+' '+s.regime.type;
-        document.getElementById('regime-val').className='regime-val '+s.regime.color;
-        // AI Analysis text
-        let aiText=`A rede neural analisou 20 features e prevê ${s.direction} com ${s.aiResult.confidence}% de confiança. `;
-        aiText+=`RSI em ${s.rsi.toFixed(1)}, ADX em ${s.adx.toFixed(1)}. `;
-        aiText+=`Regime: ${s.regime.type}. ${s.confluences.length} confluências detectadas.`;
-        document.getElementById('aa-text').textContent=aiText;
-        const cl=document.getElementById('conf-list');cl.innerHTML='';
-        s.confluences.forEach(c=>{const d=document.createElement('div');d.className='conf-i';d.textContent=c;cl.appendChild(d);});
+        document.getElementById('sig-active').classList.remove('hide');
+        document.getElementById('sig-level').textContent=score>=10?'⭐ ULTRA':score>=8?'⭐ FORTE':'FORTE';
+        document.getElementById('sig-level').className='sig-level '+(score>=8?'gold':'forte');
+        document.getElementById('sd-icon').textContent=dir==='CALL'?'📈':'📉';
+        document.getElementById('sd-txt').textContent=dir;
+        document.getElementById('sig-dir').className='sig-dir '+dir.toLowerCase();
+        document.getElementById('si-asset').textContent=activePair;
+        document.getElementById('si-time').textContent=now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+        document.getElementById('ac-pct').textContent=pct+'%';
+        document.getElementById('ac-fill').style.width=pct+'%';
+        document.getElementById('ac-fill').className='ac-fill '+(pct>=80?'ultra':pct>=60?'forte':pct>=40?'medio':'fraco');
+        const list=document.getElementById('sr-list');list.innerHTML='';
+        reasons.forEach(r=>{const d=document.createElement('div');d.className='sr-item';d.innerHTML='<i class="fas fa-check-circle"></i><span>'+r+'</span>';list.appendChild(d);});
         startCD(300);
-        if(!muted)try{const a=document.getElementById('snd-alert');a.currentTime=0;a.play().catch(()=>{});}catch(e){}
-        // Result
-        const winChance=0.50+(pct/100)*0.40;
-        const result=Math.random()<winChance?'WIN':'LOSS';
-        const sig={asset:s.market.pair,direction:s.direction,score:pct,level,confs:s.confluences.length,
-            regime:s.regime.type,aiConf:s.aiResult.confidence,
-            time:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),
-            ts:now.getTime(),result};
-        history.unshift(sig);
-        if(result==='WIN'){stats.wins++;stats.streak++;if(stats.streak>stats.bestStreak)stats.bestStreak=stats.streak;}
-        else{stats.losses++;stats.streak=0;}
-        const banca=parseFloat(document.getElementById('bf-banca').value)||100;
-        const risk=parseFloat(document.getElementById('bf-risk').value)||2;
-        const payout=parseFloat(document.getElementById('bf-payout').value)||87;
-        const entry=banca*(risk/100);
-        stats.profit+=result==='WIN'?entry*(payout/100):-entry;
-        updateStats(stats);updateHist();saveSig(sig);updateProg();
+        if(!muted)try{document.getElementById('snd').currentTime=0;document.getElementById('snd').play().catch(()=>{});}catch(e){}
+        // History
+        history.unshift({pair:activePair,dir,pct,time:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})});
+        if(history.length>20)history.pop();
+        updateHist();
     }
 
-    function startCD(sec){if(cdInterval)clearInterval(cdInterval);let r=sec;const el=document.getElementById('sc-val');
-        cdInterval=setInterval(()=>{r--;el.textContent=Math.floor(r/60)+':'+(r%60<10?'0':'')+r%60;
-        if(r<=0){clearInterval(cdInterval);document.getElementById('sig-card').className='sig-card idle';
-        document.getElementById('sig-wait').classList.remove('hide');document.getElementById('sig-live').classList.add('hide');
-        document.getElementById('sig-badge').textContent='AGUARDANDO';document.getElementById('sig-badge').className='sig-badge';}},1000);}
+    function startCD(s){if(cdTimer)clearInterval(cdTimer);let r=s;const el=document.getElementById('scd-val');
+        cdTimer=setInterval(()=>{r--;el.textContent=Math.floor(r/60)+':'+(r%60<10?'0':'')+r%60;
+        if(r<=0){clearInterval(cdTimer);
+        document.getElementById('sig-card').className='sig-card idle';
+        document.getElementById('sig-wait').classList.remove('hide');
+        document.getElementById('sig-active').classList.add('hide');
+        document.getElementById('sig-level').textContent='AGUARDANDO';
+        document.getElementById('sig-level').className='sig-level';}},1000);}
 
-    // ============ UI UPDATES ============
-    function updateIndDisplay(rsi,stoch,macd,adx,atr,bb,regime,ai){
-        document.getElementById('ind-rsi').textContent=rsi.toFixed(1);
-        document.getElementById('ind-rsi-f').style.width=rsi+'%';
-        document.getElementById('ind-rsi-f').className='ind-f '+(rsi>70?'ovb':rsi<30?'ovs':'ok');
-        document.getElementById('ind-stoch').textContent=stoch.k.toFixed(1);
-        document.getElementById('ind-stoch-f').style.width=stoch.k+'%';
-        document.getElementById('ind-stoch-f').className='ind-f '+(stoch.k>80?'ovb':stoch.k<20?'ovs':'ok');
-        document.getElementById('ind-macd').textContent=macd.hist>0?'📈 Bullish':'📉 Bearish';
-        document.getElementById('ind-macd').className='ind-v '+(macd.hist>0?'green':'red');
-        document.getElementById('ind-adx').textContent=adx.toFixed(1);
-        document.getElementById('ind-adx-f').style.width=Math.min(adx/60*100,100)+'%';
-        document.getElementById('ind-adx-f').className='ind-f '+(adx>40?'strong':adx>25?'ok':'weak');
-        document.getElementById('ind-atr').textContent=atr.toFixed(5);
-        document.getElementById('ind-bb').textContent=bb.pct<0.2?'🔽 Inferior':bb.pct>0.8?'🔼 Superior':'➡️ Meio';
-        document.getElementById('ind-trend').textContent=regime.icon+' '+regime.type;
-        document.getElementById('ind-trend').className='ind-v '+regime.color;
-        document.getElementById('ind-ai').textContent=ai.direction!=='neutral'?ai.direction+' ('+ai.confidence+'%)':'Analisando...';
-        document.getElementById('ind-ai').className='ind-v '+(ai.direction==='CALL'?'green':ai.direction==='PUT'?'red':'');
-    }
-    function updateSR(sr,pip){
-        const d=pip<0.001?5:2;
-        document.getElementById('sr-r3').textContent=sr.r3.toFixed(d);
-        document.getElementById('sr-r2').textContent=sr.r2.toFixed(d);
-        document.getElementById('sr-r1').textContent=sr.r1.toFixed(d);
-        document.getElementById('sr-pv').textContent=sr.pv.toFixed(d);
-        document.getElementById('sr-s1').textContent=sr.s1.toFixed(d);
-        document.getElementById('sr-s2').textContent=sr.s2.toFixed(d);
-        document.getElementById('sr-s3').textContent=sr.s3.toFixed(d);
-    }
-    function updateStats(s){
-        document.getElementById('st-w').textContent=s.wins||0;
-        document.getElementById('st-l').textContent=s.losses||0;
-        const t=(s.wins||0)+(s.losses||0);const r=t>0?Math.round(((s.wins||0)/t)*100):0;
-        document.getElementById('st-r').textContent=r+'%';
-        document.getElementById('st-p').textContent='$'+(s.profit||s.totalProfit||0).toFixed(2);
-        document.getElementById('ps-total').textContent=t;
-        document.getElementById('ps-streak').textContent=s.bestStreak||0;
-        document.getElementById('ps-profit').textContent='$'+(s.profit||s.totalProfit||0).toFixed(2);
-    }
     function updateHist(){
         const c=document.getElementById('hist-list');
-        if(!history.length){c.innerHTML='<div class="empty"><i class="fas fa-inbox"></i><p>Sem sinais</p></div>';return;}
+        if(!history.length){c.innerHTML='<div class="hist-empty"><p>Os sinais aparecerão aqui</p></div>';return;}
         c.innerHTML='';
-        history.slice(0,50).forEach(s=>{const d=document.createElement('div');d.className='hi '+s.result.toLowerCase();
-        d.innerHTML=`<div class="hi-l"><span class="hi-dir ${s.direction.toLowerCase()}">${s.direction==='CALL'?'📈':'📉'} ${s.direction}</span><span class="hi-ast">${s.asset}</span><span class="hi-lvl">${s.level}</span></div><div class="hi-r"><span class="hi-sc">🧠${s.aiConf}%</span><span class="hi-tm">${s.time}</span><span class="hi-res ${s.result.toLowerCase()}">${s.result==='WIN'?'✅WIN':'❌LOSS'}</span></div>`;
+        history.forEach(h=>{const d=document.createElement('div');d.className='hi';
+        d.innerHTML=`<div class="hi-left"><span class="hi-icon">${h.dir==='CALL'?'📈':'📉'}</span><span class="hi-pair">${h.pair}</span><span class="hi-dir-txt ${h.dir.toLowerCase()}">${h.dir}</span></div><div class="hi-right"><span class="hi-conf">🧠 ${h.pct}%</span><span class="hi-time">${h.time}</span></div>`;
         c.appendChild(d);});
     }
-    function updateSentiment(){
-        const b=35+Math.floor(Math.random()*30);
-        document.getElementById('sent-fill').style.width=b+'%';
-        document.getElementById('sent-bull').textContent=b+'%';
-        document.getElementById('sent-bear').textContent=(100-b)+'%';
-        const v=document.getElementById('sent-verdict');
-        if(b>60){v.textContent='🐂 BULLISH';v.className='sent-verdict green';}
-        else if(b<40){v.textContent='🐻 BEARISH';v.className='sent-verdict red';}
-        else{v.textContent='⚖️ NEUTRO';v.className='sent-verdict neutral';}
-    }
+
+    // ====== CHART ======
     function drawChart(){
-        const canvas=document.getElementById('price-chart');if(!canvas)return;
-        const ctx=canvas.getContext('2d');const W=canvas.parentElement.clientWidth;const H=200;
-        canvas.width=W;canvas.height=H;ctx.clearRect(0,0,W,H);
-        const sim=sims['EUR/USD'];if(!sim)return;
-        const prices=sim.prices.slice(-100);if(prices.length<2)return;
-        const min=Math.min(...prices);const max=Math.max(...prices);const range=max-min||0.001;
-        // Grid
+        const cv=document.getElementById('chart');if(!cv)return;
+        const ctx=cv.getContext('2d'),W=cv.parentElement.clientWidth-20,H=180;
+        cv.width=W;cv.height=H;ctx.clearRect(0,0,W,H);
+        const sim=sims[activePair];if(!sim||sim.prices.length<2)return;
+        const prices=sim.prices.slice(-80);
+        const mn=Math.min(...prices),mx=Math.max(...prices),rng=mx-mn||0.001;
         ctx.strokeStyle='#1a2540';ctx.lineWidth=0.5;
         for(let i=0;i<5;i++){const y=H*i/4;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-        // Price line
-        ctx.beginPath();ctx.strokeStyle=prices[prices.length-1]>prices[0]?'#00e676':'#ff1744';ctx.lineWidth=2;
-        prices.forEach((p,i)=>{const x=(i/(prices.length-1))*W;const y=H-(((p-min)/range)*H*0.8+H*0.1);
-        i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.stroke();
-        // Gradient fill
-        const lastX=W;const lastY=H-(((prices[prices.length-1]-min)/range)*H*0.8+H*0.1);
-        ctx.lineTo(lastX,H);ctx.lineTo(0,H);ctx.closePath();
-        const grad=ctx.createLinearGradient(0,0,0,H);
-        const color=prices[prices.length-1]>prices[0]?'0,230,118':'255,23,68';
-        grad.addColorStop(0,'rgba('+color+',0.15)');grad.addColorStop(1,'rgba('+color+',0)');
-        ctx.fillStyle=grad;ctx.fill();
-        // Price label
-        ctx.fillStyle='#fff';ctx.font='12px JetBrains Mono';
-        ctx.fillText('EUR/USD  '+prices[prices.length-1].toFixed(5),10,20);
+        const up=prices[prices.length-1]>prices[0];
+        ctx.beginPath();ctx.strokeStyle=up?'#00e676':'#ff1744';ctx.lineWidth=2.5;
+        prices.forEach((p,i)=>{const x=(i/(prices.length-1))*W,y=H-(((p-mn)/rng)*H*0.8+H*0.1);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+        ctx.stroke();
+        ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();
+        const g=ctx.createLinearGradient(0,0,0,H);
+        const cl=up?'0,230,118':'255,23,68';
+        g.addColorStop(0,'rgba('+cl+',0.12)');g.addColorStop(1,'rgba('+cl+',0)');
+        ctx.fillStyle=g;ctx.fill();
+        const d=PAIRS[activePair].pip<0.001?5:2;
+        ctx.fillStyle='#fff';ctx.font='bold 13px JetBrains Mono';
+        ctx.fillText(activePair+'  '+prices[prices.length-1].toFixed(d),8,18);
     }
 
-    // ============ FIREBASE ============
-    async function saveSig(sig){if(!U)return;try{await addDoc(collection(db,"users",U.uid,"signals"),{...sig,createdAt:serverTimestamp()});await updateDoc(doc(db,"users",U.uid),{'stats.wins':stats.wins,'stats.losses':stats.losses,'stats.totalProfit':parseFloat(stats.profit.toFixed(2)),'stats.bestStreak':stats.bestStreak});}catch(e){}}
-    async function loadHist(){if(!U)return;try{const q=query(collection(db,"users",U.uid,"signals"),orderBy("createdAt","desc"),limit(50));const snap=await getDocs(q);snap.forEach(d=>history.push(d.data()));updateHist();}catch(e){}}
-
-    // ============ NEWS ============
-    function loadNews(){
-        const h=new Date().getHours();const nl=document.getElementById('news-list');
-        const news=[{t:(h+1)+':00',cur:'🇺🇸 USD',title:'Non-Farm Payrolls',imp:'high',soon:true},{t:(h+2)+':30',cur:'🇺🇸 USD',title:'Taxa Desemprego',imp:'high'},{t:(h+1)+':15',cur:'🇪🇺 EUR',title:'CPI Inflação',imp:'high',soon:true},{t:(h+3)+':00',cur:'🇬🇧 GBP',title:'Juros BOE',imp:'high'},{t:(h+1)+':30',cur:'🇺🇸 USD',title:'PIB Trimestral',imp:'med'},{t:(h+2)+':00',cur:'🇪🇺 EUR',title:'PMI',imp:'med'},{t:(h+4)+':00',cur:'🇯🇵 JPY',title:'Balança Comercial',imp:'low'}];
-        nl.innerHTML='';news.forEach(n=>{const d=document.createElement('div');d.className='news-i '+n.imp;
-        d.innerHTML=`<span class="ni-t">${n.t}</span><div class="ni-info"><span class="ni-cur">${n.cur}</span><span class="ni-title">${n.title}</span></div><div class="ni-imp"><span class="leg-d ${n.imp}"></span>${n.imp==='high'?'ALTO':n.imp==='med'?'MÉDIO':'BAIXO'}</div>`;
-        nl.appendChild(d);
-        if(n.imp==='high'&&n.soon){newsBlock=true;document.getElementById('news-warn').classList.remove('hide');document.getElementById('news-warn-txt').textContent=n.cur+' — '+n.title;document.getElementById('news-warn-time').textContent=n.t;setTimeout(()=>{document.getElementById('news-warn').classList.add('hide');newsBlock=false;},60000);}});
-    }
-
-    // ============ RISK MANAGEMENT ============
-    window.calcRisk=function(){
-        const b=parseFloat(document.getElementById('bf-banca').value)||100;
-        const r=parseFloat(document.getElementById('bf-risk').value)||2;
-        const p=parseFloat(document.getElementById('bf-payout').value)||87;
-        const e=b*(r/100);
-        document.getElementById('rc-entry').textContent='$'+e.toFixed(2);
-        document.getElementById('rc-sl').textContent='-$'+(b*0.10).toFixed(2);
-        document.getElementById('rc-sg').textContent='+$'+(b*0.20).toFixed(2);
-        document.getElementById('rc-max').textContent=Math.floor((b*0.10)/e);
-        document.getElementById('pi-meta').textContent='+$'+(b*0.20).toFixed(2);
-        let me=e,mt=0;for(let i=0;i<3;i++){mt+=me;const mp=(me*(p/100))-mt+me;
-        document.getElementById('mg-e'+i).textContent='$'+me.toFixed(2);
-        document.getElementById('mg-t'+i).textContent='$'+mt.toFixed(2);
-        document.getElementById('mg-p'+i).textContent='+$'+mp.toFixed(2);
-        me=Math.ceil((mt/(p/100))*100)/100;}
-        if(U)updateDoc(doc(db,"users",U.uid),{'banca.value':b,'banca.risk':r,'banca.payout':p}).catch(()=>{});
-    }
-    function updateProg(){
-        const b=parseFloat(document.getElementById('bf-banca').value)||100;
-        const m=b*0.20;const c=stats.profit;const p=Math.min(Math.max(Math.round((c/m)*100),0),100);
-        document.getElementById('prog-pct').textContent=p+'%';
-        document.getElementById('pi-lucro').textContent='$'+c.toFixed(2);
-        document.getElementById('pi-ops').textContent=(stats.wins+stats.losses)+'/'+(document.getElementById('rc-max')?.textContent||5);
-        const ring=document.getElementById('prog-circle');const circ=2*Math.PI*54;
-        ring.style.strokeDasharray=circ;ring.style.strokeDashoffset=circ-(p/100)*circ;
-    }
-
-    // ============ NAV ============
-    window.goPage=function(pg,btn){document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));document.getElementById('pg-'+pg).classList.add('active');if(btn){document.querySelectorAll('.bn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}};
-    window.toggleMute=function(){muted=!muted;document.getElementById('btn-sound').innerHTML=muted?'<i class="fas fa-volume-mute"></i>':'<i class="fas fa-volume-up"></i>';};
-    window.fil=function(f,btn){document.querySelectorAll('.fil').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.hi').forEach(i=>{if(f==='all')i.style.display='';else if(f==='win')i.style.display=i.classList.contains('win')?'':'none';else if(f==='loss')i.style.display=i.classList.contains('loss')?'':'none';else if(f==='call')i.style.display=i.innerHTML.includes('CALL')?'':'none';else if(f==='put')i.style.display=i.innerHTML.includes('PUT')?'':'none';});};
-    window.savePref=async function(k,v){if(!U)return;try{await updateDoc(doc(db,"users",U.uid),{['settings.'+k]:v});if(UD.settings)UD.settings[k]=v;}catch(e){}};
-    setTimeout(()=>{document.getElementById('splash').classList.remove('active');},3000);
+    window.togMute=function(){muted=!muted;document.getElementById('btn-snd').innerHTML=muted?'<i class="fas fa-volume-mute"></i>':'<i class="fas fa-volume-up"></i>';};
+    setTimeout(()=>document.getElementById('splash').classList.remove('active'),3000);
     </script>
 </body>
 </html>
